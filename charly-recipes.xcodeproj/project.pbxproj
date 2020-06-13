@@ -12,6 +12,7 @@
 		451C29DD2494C1AB007BD424 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451C29DC2494C1AB007BD424 /* Assets.xcassets */; };
 		451C29E02494C1AB007BD424 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 451C29DE2494C1AB007BD424 /* LaunchScreen.storyboard */; };
 		451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29E72494C309007BD424 /* AllRecipesViewController.swift */; };
+		451C29EC2494D7D6007BD424 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29EB2494D7D6007BD424 /* Recipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		451C29E12494C1AB007BD424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		451C29E72494C309007BD424 /* AllRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesViewController.swift; sourceTree = "<group>"; };
 		451C29E92494D21B007BD424 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
+		451C29EB2494D7D6007BD424 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			children = (
 				451C29D32494C1AA007BD424 /* AppDelegate.swift */,
 				451C29D52494C1AA007BD424 /* SceneDelegate.swift */,
+				451C29EA2494D7C4007BD424 /* Model */,
 				451C29DC2494C1AB007BD424 /* Assets.xcassets */,
 				451C29DE2494C1AB007BD424 /* LaunchScreen.storyboard */,
 				451C29E92494D21B007BD424 /* recipes.json */,
@@ -64,6 +67,14 @@
 				451C29E72494C309007BD424 /* AllRecipesViewController.swift */,
 			);
 			path = "charly-recipes";
+			sourceTree = "<group>";
+		};
+		451C29EA2494D7C4007BD424 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				451C29EB2494D7D6007BD424 /* Recipe.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 				451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */,
 				451C29D42494C1AA007BD424 /* AppDelegate.swift in Sources */,
 				451C29D62494C1AA007BD424 /* SceneDelegate.swift in Sources */,
+				451C29EC2494D7D6007BD424 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
