@@ -25,6 +25,8 @@ class RecipeHeader: UICollectionReusableView {
         title.textColor = .label
         title.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 22, weight: .bold))
         ingredients.textColor = .secondaryLabel
+        ingredients.numberOfLines = 0
+        
         
         let stackView = UIStackView(arrangedSubviews: [separator,title, ingredients])
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,10 +38,11 @@ class RecipeHeader: UICollectionReusableView {
             
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
         ])
-        stackView.setCustomSpacing(10, after: separator)
+        stackView.setCustomSpacing(12, after: separator)
+        stackView.setCustomSpacing(6, after: title)
     }
     
     required init?(coder: NSCoder) {
