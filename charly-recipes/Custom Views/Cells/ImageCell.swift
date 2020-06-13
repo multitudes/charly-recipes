@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ImageCell: UICollectionViewCell {
+class ImageCell: UICollectionViewCell, SelfConfiguringCell {
+   
     static let reuseID: String = "RecipeCell"
     
     let imageView = UIImageView()
+    var editable: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,9 +33,10 @@ class ImageCell: UICollectionViewCell {
         
     }
     
-    func configure(with recipe: Recipe, index: Int) {
-        imageView.image = UIImage(named: recipe.pictures[index])
+    func configure(with item: ImageItem) {
+        imageView.image = UIImage(named: item.image)
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

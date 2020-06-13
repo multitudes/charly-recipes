@@ -9,9 +9,9 @@
 import Foundation
 
 struct Section: Decodable, Hashable {
-    
+    let type: String
     let recipeName: String
     let ingredients: String
-    let images: [ImageItem]
+    let items: [ImageItem]
     
 }

@@ -1,5 +1,5 @@
 //
-//  ImagesCells.swift
+//  SelfConfiguringCell.swift
 //  charly-recipes
 //
 //  Created by Laurent B on 13/06/2020.
@@ -8,9 +8,7 @@
 
 import Foundation
 
-struct ImageItem: Decodable, Hashable {
-    let id: Int
-    let name: String
-    let image: String
-    let editable: Bool
+protocol SelfConfiguringCell {
+    static var reuseID: String { get }
+    func configure(with item: ImageItem)
 }
