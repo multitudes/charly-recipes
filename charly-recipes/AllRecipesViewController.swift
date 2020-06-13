@@ -10,21 +10,31 @@ import UIKit
 
 class AllRecipesViewController: UIViewController {
 
+    let recipes = Bundle.main.decode([Section].self, from: "recipes.json")
+    var collectionView: UICollectionView!
+
+    var dataSource: UICollectionViewDiffableDataSource<Section, ImageItem>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "All Recipes"
-        view.backgroundColor = .systemBackground
+        print(recipes)
+        configureViewController()
     }
+   
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRecipe))
+        navigationItem.rightBarButtonItem = addButton
     }
-    */
+
+    
+    @objc func addRecipe() {
+        let destVC          = AddRecipeViewController()
+        destVC.delegate     = self
+        let navController   = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
+    }
 
 }
