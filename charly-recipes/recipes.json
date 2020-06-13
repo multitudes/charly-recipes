@@ -1,0 +1,46 @@
+[
+    {
+        "recipeName": "Sweet and crunchy tofu",
+        "ingredients": "• 2 cups vegetable oil for frying\n• 14 ounces to 1 pound firm or medium firm tofu, cut into bite size pieces\n• ¼ cup potato starch ",
+        "images": [
+            {
+                "name": "cut-tofu",
+                "image": "cut-tofu",
+                "editable": false
+            },
+            {
+                "name": "fryingtofu-scaled",
+                "image": "fryingtofu-scaled",
+                "editable": false
+            },
+            {
+                "name": "dubugangjeong-insta",
+                "image": "dubugangjeong-insta",
+                "editable": false
+            }
+        ]
+    },
+    {
+        "recipeName": "Healthy vegetable rice bowl",
+        "ingredients": "• 2 cups rice (440 grams)/n• 8 ounces cleaned soybean sprouts\n• 2 ounces kale (60 grams), tough stems removed, washed, drained, and chopped\n• 2 large king oyster mushrooms (about 6 ounces), sliced",
+        "images": [
+            {
+                "name": "healthyrice-uncooked-scaled",
+                "image": "healthyrice-uncooked-scaled",
+                "editable": false
+            },
+            {
+                "name": "healthy-insta",
+                "image": "healthy-insta",
+                "editable": false
+            }
+        ]
+    },
+    {
+        "recipeName": "sdfgdsfg",
+        "ingredients": "sdfhs",
+        "images": [
+            
+        ]
+    }
+]

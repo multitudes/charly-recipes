@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		451C29D42494C1AA007BD424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29D32494C1AA007BD424 /* AppDelegate.swift */; };
 		451C29D62494C1AA007BD424 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29D52494C1AA007BD424 /* SceneDelegate.swift */; };
-		451C29D82494C1AA007BD424 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29D72494C1AA007BD424 /* ViewController.swift */; };
 		451C29DD2494C1AB007BD424 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451C29DC2494C1AB007BD424 /* Assets.xcassets */; };
 		451C29E02494C1AB007BD424 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 451C29DE2494C1AB007BD424 /* LaunchScreen.storyboard */; };
 		451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29E72494C309007BD424 /* AllRecipesViewController.swift */; };
@@ -19,11 +18,11 @@
 		451C29D02494C1AA007BD424 /* charly-recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "charly-recipes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		451C29D32494C1AA007BD424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		451C29D52494C1AA007BD424 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		451C29D72494C1AA007BD424 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		451C29DC2494C1AB007BD424 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		451C29DF2494C1AB007BD424 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		451C29E12494C1AB007BD424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		451C29E72494C309007BD424 /* AllRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesViewController.swift; sourceTree = "<group>"; };
+		451C29E92494D21B007BD424 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +57,9 @@
 			children = (
 				451C29D32494C1AA007BD424 /* AppDelegate.swift */,
 				451C29D52494C1AA007BD424 /* SceneDelegate.swift */,
-				451C29D72494C1AA007BD424 /* ViewController.swift */,
 				451C29DC2494C1AB007BD424 /* Assets.xcassets */,
 				451C29DE2494C1AB007BD424 /* LaunchScreen.storyboard */,
+				451C29E92494D21B007BD424 /* recipes.json */,
 				451C29E12494C1AB007BD424 /* Info.plist */,
 				451C29E72494C309007BD424 /* AllRecipesViewController.swift */,
 			);
@@ -138,7 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */,
-				451C29D82494C1AA007BD424 /* ViewController.swift in Sources */,
 				451C29D42494C1AA007BD424 /* AppDelegate.swift in Sources */,
 				451C29D62494C1AA007BD424 /* SceneDelegate.swift in Sources */,
 			);
