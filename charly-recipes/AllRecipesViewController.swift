@@ -25,18 +25,20 @@ class AllRecipesViewController: UIViewController {
     func configureViewController() {
         title = "All Recipes"
         view.backgroundColor = .systemBackground
-        //navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = true
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRecipe))
         navigationItem.rightBarButtonItem = addButton
         
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
 
         view.addSubview(collectionView)
+        collectionView.register(RecipeHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RecipeHeader.reuseID)
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseID)
         createDataSource()
         reloadData()
+        
     }
 
     @objc func addRecipe() {
@@ -58,13 +60,24 @@ class AllRecipesViewController: UIViewController {
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, ImageItem>(collectionView: collectionView) { collectionView, indexPath, item in
             switch self.recipes[indexPath.section].type {
-//            case "mediumTable":
-//                return self.configure(MediumTableCell.self, with: app, for: indexPath)
-//            case "smallTable":
-//                return self.configure(SmallTableCell.self, with: app, for: indexPath)
+
             default:
                 return self.configure(ImageCell.self, with: item, for: indexPath)
             }
+        }
+        
+        dataSource?.supplementaryViewProvider = { [weak self]
+            collectionView, kind, indexPath in
+            guard let recipeHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RecipeHeader.reuseID, for: indexPath) as? RecipeHeader else {
+                return nil
+            }
+            guard let firstItem = self?.dataSource?.itemIdentifier(for: indexPath) else { return nil }
+            guard let section = self?.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return nil }
+            if section.recipeName.isEmpty { return nil }
+
+            recipeHeader.title.text = section.recipeName
+            recipeHeader.ingredients.text = section.ingredients
+            return recipeHeader
         }
     }
     
@@ -76,4 +89,35 @@ class AllRecipesViewController: UIViewController {
         }
         dataSource?.apply(snapshot)
     }
+    
+    func createCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {
+            sectionIndex, layoutEnvironment in
+            let recipe = self.recipes[sectionIndex]
+            switch recipe.type {
+                default:
+                    return self.createRecipeSection(using: recipe)
+            }
+        }
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 20
+        layout.configuration = config
+        return layout
+    }
+    
+    func createRecipeSection(using section: Section ) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+        let layoutGroupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .estimated(350))
+        let layoutgroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupsize, subitems: [layoutItem])
+        let layoutSection = NSCollectionLayoutSection(group: layoutgroup)
+        layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(200))
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
+        return layoutSection
+        
+    }
+
 }

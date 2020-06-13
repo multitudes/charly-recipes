@@ -21,6 +21,7 @@
 		453C98922494E60000400F43 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29EE2494D91F007BD424 /* Bundle-Decodable.swift */; };
 		453C98942494E6C900400F43 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 453C98932494E6C900400F43 /* recipes.json */; };
 		453C98962494FF3400400F43 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C98952494FF3400400F43 /* SelfConfiguringCell.swift */; };
+		453C98982495198600400F43 /* RecipeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C98972495198600400F43 /* RecipeHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		451C29FE2494DE02007BD424 /* AllRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesViewModel.swift; sourceTree = "<group>"; };
 		453C98932494E6C900400F43 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		453C98952494FF3400400F43 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
+		453C98972495198600400F43 /* RecipeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				451C29EE2494D91F007BD424 /* Bundle-Decodable.swift */,
 				451C29ED2494D91F007BD424 /* Extensions */,
 				451C29E72494C309007BD424 /* AllRecipesViewController.swift */,
+				453C98972495198600400F43 /* RecipeHeader.swift */,
 				453C98952494FF3400400F43 /* SelfConfiguringCell.swift */,
 				451C29FE2494DE02007BD424 /* AllRecipesViewModel.swift */,
 				451C29FC2494DCD9007BD424 /* AddRecipeViewController.swift */,
@@ -196,6 +199,7 @@
 			files = (
 				451C29FD2494DCD9007BD424 /* AddRecipeViewController.swift in Sources */,
 				451C29F32494D9C4007BD424 /* Section.swift in Sources */,
+				453C98982495198600400F43 /* RecipeHeader.swift in Sources */,
 				451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */,
 				453C98962494FF3400400F43 /* SelfConfiguringCell.swift in Sources */,
 				451C29D42494C1AA007BD424 /* AppDelegate.swift in Sources */,
