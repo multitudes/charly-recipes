@@ -19,6 +19,7 @@
 		451C29FD2494DCD9007BD424 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29FC2494DCD9007BD424 /* AddRecipeViewController.swift */; };
 		451C29FF2494DE02007BD424 /* AllRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29FE2494DE02007BD424 /* AllRecipesViewModel.swift */; };
 		453C98922494E60000400F43 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29EE2494D91F007BD424 /* Bundle-Decodable.swift */; };
+		453C98942494E6C900400F43 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 453C98932494E6C900400F43 /* recipes.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,6 @@
 		451C29DF2494C1AB007BD424 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		451C29E12494C1AB007BD424 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		451C29E72494C309007BD424 /* AllRecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesViewController.swift; sourceTree = "<group>"; };
-		451C29E92494D21B007BD424 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		451C29EE2494D91F007BD424 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 		451C29F02494D9AA007BD424 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		451C29F22494D9C4007BD424 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -37,6 +37,7 @@
 		451C29F82494DA6E007BD424 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		451C29FC2494DCD9007BD424 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		451C29FE2494DE02007BD424 /* AllRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesViewModel.swift; sourceTree = "<group>"; };
+		453C98932494E6C900400F43 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +81,8 @@
 				451C29D32494C1AA007BD424 /* AppDelegate.swift */,
 				451C29DC2494C1AB007BD424 /* Assets.xcassets */,
 				451C29DE2494C1AB007BD424 /* LaunchScreen.storyboard */,
-				451C29E92494D21B007BD424 /* recipes.json */,
 				451C29E12494C1AB007BD424 /* Info.plist */,
+				453C98932494E6C900400F43 /* recipes.json */,
 			);
 			path = "charly-recipes";
 			sourceTree = "<group>";
@@ -178,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				451C29E02494C1AB007BD424 /* LaunchScreen.storyboard in Resources */,
+				453C98942494E6C900400F43 /* recipes.json in Resources */,
 				451C29DD2494C1AB007BD424 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,7 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.laurentb.charly-recipes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -362,7 +364,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.laurentb.charly-recipes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
