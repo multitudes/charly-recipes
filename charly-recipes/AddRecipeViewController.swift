@@ -34,7 +34,12 @@ class AddRecipeViewController: UIViewController {
         
         recipeTitleTextField.delegate = self
         recipeDescriptionTextView.delegate = self
-        recipeDescriptionTextView
+        
+        recipeDescriptionTextView.adjustsFontForContentSizeCategory = true
+        recipeDescriptionTextView.font = .preferredFont(forTextStyle: .body)
+        recipeDescriptionTextView.layer.borderColor = UIColor.systemGray4.cgColor
+        recipeDescriptionTextView.layer.borderWidth = 1.0
+        recipeDescriptionTextView.layer.cornerRadius = 10
     }
     
     func configureUI() {
@@ -42,7 +47,6 @@ class AddRecipeViewController: UIViewController {
         let padding: CGFloat = 20
         
         view.addSubview(recipeTitle)
-        
         view.addSubview(recipeTitleTextField)
         view.addSubview(recipeDescription)
         view.addSubview(recipeDescriptionTextView)
@@ -54,22 +58,22 @@ class AddRecipeViewController: UIViewController {
             recipeTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding * 2),
             recipeTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             recipeTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            recipeTitle.heightAnchor.constraint(equalToConstant: padding * 2),
+            recipeTitle.heightAnchor.constraint(equalToConstant: padding * 2.5),
             
             recipeTitleTextField.topAnchor.constraint(equalTo: recipeTitle.bottomAnchor, constant: padding),
             recipeTitleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             recipeTitleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            recipeTitleTextField.heightAnchor.constraint(equalToConstant: 50),
+            recipeTitleTextField.heightAnchor.constraint(equalToConstant: padding * 2.5),
             
             recipeDescription.topAnchor.constraint(equalTo: recipeTitleTextField.bottomAnchor, constant: padding),
             recipeDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             recipeDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            recipeDescription.heightAnchor.constraint(equalToConstant: padding * 2),
+            recipeDescription.heightAnchor.constraint(equalToConstant: padding * 2.5),
             
             recipeDescriptionTextView.topAnchor.constraint(equalTo: recipeDescription.bottomAnchor, constant: padding),
             recipeDescriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             recipeDescriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            recipeDescriptionTextView.heightAnchor.constraint(equalToConstant: 150),
+            recipeDescriptionTextView.heightAnchor.constraint(equalToConstant: padding * 5),
         ])
     }
     
@@ -92,14 +96,17 @@ class AddRecipeViewController: UIViewController {
 
 
 extension AddRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         print("textFieldShouldReturn")
-        
+        print(textField.text)
+        textField.resignFirstResponder()
         return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
+        print(textView.text)
     }
 }
