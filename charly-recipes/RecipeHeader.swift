@@ -23,7 +23,7 @@ class RecipeHeader: UICollectionReusableView {
         separator.backgroundColor = .quaternaryLabel
         
         title.textColor = .label
-        title.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 22, weight: .bold))
+        title.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 24, weight: .bold))
         ingredients.textColor = .secondaryLabel
         ingredients.numberOfLines = 0
         

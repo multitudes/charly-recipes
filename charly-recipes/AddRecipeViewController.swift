@@ -55,10 +55,10 @@ class AddRecipeViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            recipeTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding * 2),
+            recipeTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             recipeTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             recipeTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            recipeTitle.heightAnchor.constraint(equalToConstant: padding * 2.5),
+            recipeTitle.heightAnchor.constraint(equalToConstant: padding * 2),
             
             recipeTitleTextField.topAnchor.constraint(equalTo: recipeTitle.bottomAnchor, constant: padding),
             recipeTitleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
@@ -68,7 +68,7 @@ class AddRecipeViewController: UIViewController {
             recipeDescription.topAnchor.constraint(equalTo: recipeTitleTextField.bottomAnchor, constant: padding),
             recipeDescription.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             recipeDescription.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            recipeDescription.heightAnchor.constraint(equalToConstant: padding * 2.5),
+            recipeDescription.heightAnchor.constraint(equalToConstant: padding * 2),
             
             recipeDescriptionTextView.topAnchor.constraint(equalTo: recipeDescription.bottomAnchor, constant: padding),
             recipeDescriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),

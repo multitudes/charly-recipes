@@ -31,7 +31,7 @@ class CRTitleLabel: UILabel {
         translatesAutoresizingMaskIntoConstraints = false
         
         textColor = .label
-        font = UIFont.systemFont(ofSize: 34, weight: .bold)
+        font = UIFont.systemFont(ofSize: 24, weight: .bold)
     }
 
 }
