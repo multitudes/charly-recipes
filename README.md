@@ -1,10 +1,9 @@
 # charly-recipes
 
 A small recipe app which allows the user to manage cooking recipes.
- 
-![](icon.png)
+
 <p >
-  <img src="icon.png" width="230"  title="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Icon.png" width="230"  title="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 <br></br>
 
