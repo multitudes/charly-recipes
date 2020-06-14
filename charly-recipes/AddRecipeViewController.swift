@@ -10,16 +10,24 @@ import UIKit
 
 class AddRecipeViewController: UIViewController {
     
+    var items = [ImageItem(id: 1, name: "", image: "addImagePlaceholder", editable: false)]
+
+    var horizontalCollectionView: UICollectionView!
+    
     weak var delegate: AllRecipesViewController!
+    
     let recipeTitle = CRTitleLabel(with: "Title: ")
     let recipeTitleTextField = CRTextField()
     let recipeDescription = CRTitleLabel(with: "Ingredients: ")
     let recipeDescriptionTextView = UITextView()
+    let addImageLabel = CRTitleLabel(with: "Add images: ")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureViewController()
+        configureTextInput()
+        configureHorizontalCollectionView()
         configureUI()
         createDismissKeyboardTapGesture()
     }
@@ -32,6 +40,9 @@ class AddRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismssVC))
         
+    }
+    
+    func configureTextInput() {
         recipeTitleTextField.delegate = self
         recipeDescriptionTextView.delegate = self
         
@@ -42,6 +53,16 @@ class AddRecipeViewController: UIViewController {
         recipeDescriptionTextView.layer.cornerRadius = 10
     }
     
+    func configureHorizontalCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        horizontalCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        horizontalCollectionView.register(NewItemImageCell.self, forCellWithReuseIdentifier: "AddRecipeCell")
+        horizontalCollectionView.backgroundColor = .yellow
+        horizontalCollectionView.delegate = self
+        horizontalCollectionView.dataSource = self
+    }
+    
     func configureUI() {
         
         let padding: CGFloat = 20
@@ -50,8 +71,11 @@ class AddRecipeViewController: UIViewController {
         view.addSubview(recipeTitleTextField)
         view.addSubview(recipeDescription)
         view.addSubview(recipeDescriptionTextView)
+        view.addSubview(addImageLabel)
+        view.addSubview(horizontalCollectionView)
         
         recipeDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
@@ -74,6 +98,16 @@ class AddRecipeViewController: UIViewController {
             recipeDescriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             recipeDescriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             recipeDescriptionTextView.heightAnchor.constraint(equalToConstant: padding * 5),
+            
+            addImageLabel.topAnchor.constraint(equalTo: recipeDescriptionTextView.bottomAnchor, constant: padding),
+            addImageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            addImageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            addImageLabel.heightAnchor.constraint(equalToConstant: padding * 2),
+            
+            horizontalCollectionView.topAnchor.constraint(equalTo: addImageLabel.bottomAnchor, constant: padding),
+            horizontalCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            horizontalCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            horizontalCollectionView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
@@ -100,13 +134,28 @@ extension AddRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         print("textFieldShouldReturn")
-        print(textField.text)
+        //print(textField.text)
         textField.resignFirstResponder()
         return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
-        print(textView.text)
+        //print(textView.text)
+    }
+}
+extension AddRecipeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/2.5, height: collectionView.frame.width/2)
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath) as! NewItemImageCell
+        //cell.image = self.recipeToAdd[indexPath.item]
+        cell.configure(with: items[indexPath.item])
+        return cell
     }
 }
