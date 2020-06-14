@@ -26,6 +26,7 @@ class AllRecipesViewController: UIViewController {
         title = "All Recipes"
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addRecipe))
         navigationItem.rightBarButtonItem = addButton
         
@@ -34,11 +35,12 @@ class AllRecipesViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
 
         view.addSubview(collectionView)
+        
         collectionView.register(RecipeHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RecipeHeader.reuseID)
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseID)
+        
         createDataSource()
         reloadData()
-        
     }
 
     @objc func addRecipe() {
@@ -48,11 +50,11 @@ class AllRecipesViewController: UIViewController {
         present(navController, animated: true)
     }
 
+    
     func configure<T: SelfConfiguringCell>(_ cellType: T.Type, with item: ImageItem, for indexPath: IndexPath) -> T {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseID, for: indexPath) as? T else {
             fatalError("Unable to dequeue \(cellType)")
         }
-
         cell.configure(with: item)
         return cell
     }

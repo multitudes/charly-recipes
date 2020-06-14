@@ -22,6 +22,8 @@
 		453C98942494E6C900400F43 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 453C98932494E6C900400F43 /* recipes.json */; };
 		453C98962494FF3400400F43 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C98952494FF3400400F43 /* SelfConfiguringCell.swift */; };
 		453C98982495198600400F43 /* RecipeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C98972495198600400F43 /* RecipeHeader.swift */; };
+		453C989B2496388900400F43 /* CRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C989A2496388900400F43 /* CRTextField.swift */; };
+		453C989E24963E3900400F43 /* CRTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C989D24963E3900400F43 /* CRTitleLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		453C98932494E6C900400F43 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		453C98952494FF3400400F43 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
 		453C98972495198600400F43 /* RecipeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeHeader.swift; sourceTree = "<group>"; };
+		453C989A2496388900400F43 /* CRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTextField.swift; sourceTree = "<group>"; };
+		453C989D24963E3900400F43 /* CRTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTitleLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 		451C29F62494DA41007BD424 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				453C989C24963E2400400F43 /* Labels */,
+				453C98992496385B00400F43 /* TextFields */,
 				451C29F72494DA4D007BD424 /* Cells */,
 			);
 			path = "Custom Views";
@@ -124,6 +130,22 @@
 				451C29F82494DA6E007BD424 /* ImageCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		453C98992496385B00400F43 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				453C989A2496388900400F43 /* CRTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		453C989C24963E2400400F43 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				453C989D24963E3900400F43 /* CRTitleLabel.swift */,
+			);
+			path = Labels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,9 +223,11 @@
 				451C29F32494D9C4007BD424 /* Section.swift in Sources */,
 				453C98982495198600400F43 /* RecipeHeader.swift in Sources */,
 				451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */,
+				453C989E24963E3900400F43 /* CRTitleLabel.swift in Sources */,
 				453C98962494FF3400400F43 /* SelfConfiguringCell.swift in Sources */,
 				451C29D42494C1AA007BD424 /* AppDelegate.swift in Sources */,
 				451C29F52494DA03007BD424 /* ImageItem.swift in Sources */,
+				453C989B2496388900400F43 /* CRTextField.swift in Sources */,
 				451C29FF2494DE02007BD424 /* AllRecipesViewModel.swift in Sources */,
 				451C29D62494C1AA007BD424 /* SceneDelegate.swift in Sources */,
 				453C98922494E60000400F43 /* Bundle-Decodable.swift in Sources */,
