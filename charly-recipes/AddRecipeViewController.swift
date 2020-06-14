@@ -58,7 +58,7 @@ class AddRecipeViewController: UIViewController {
         layout.scrollDirection = .horizontal
         horizontalCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         horizontalCollectionView.register(NewItemImageCell.self, forCellWithReuseIdentifier: "AddRecipeCell")
-        horizontalCollectionView.backgroundColor = .yellow
+        horizontalCollectionView.backgroundColor = .systemBackground
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
     }
@@ -145,12 +145,16 @@ extension AddRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
     }
 }
 extension AddRecipeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2.5, height: collectionView.frame.width/2)
+        return CGSize(width: collectionView.frame.height * 0.9, height: collectionView.frame.height * 0.9)
     }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath) as! NewItemImageCell

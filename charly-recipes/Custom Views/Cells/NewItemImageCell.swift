@@ -17,7 +17,7 @@ class NewItemImageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        imageView.layer.cornerRadius = 5
+        imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
