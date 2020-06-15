@@ -11,8 +11,19 @@ import UIKit
 class NewItemImageCell: UICollectionViewCell {
     static let reuseID: String = "AddRecipeCell"
     
+
+    
+    
     let imageView = UIImageView()
     var editable: Bool = true
+
+    override var isSelected:Bool {
+        didSet {
+
+            self.imageView.alpha = isSelected ? 0.75 : 1.0
+        }
+      }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
