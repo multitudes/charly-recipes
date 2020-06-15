@@ -28,3 +28,19 @@ extension Bundle {
         return loaded
     }
 }
+
+extension Encodable {
+    func jsonData(keys: JSONEncoder.KeyEncodingStrategy = .useDefaultKeys, dates: JSONEncoder.DateEncodingStrategy = .deferredToDate) -> Data {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = keys
+        encoder.dateEncodingStrategy = dates
+
+        do {
+            return try encoder.encode(self)
+        } catch {
+            print("Failed to encode to JSON.")
+            return Data()
+        }
+    }
+
+}

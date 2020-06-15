@@ -15,11 +15,11 @@ class NewItemImageCell: UICollectionViewCell {
     
     
     let imageView = UIImageView()
+    var closeButton : UIButton!
     var editable: Bool = true
 
     override var isSelected:Bool {
         didSet {
-
             self.imageView.alpha = isSelected ? 0.75 : 1.0
         }
       }
@@ -33,13 +33,26 @@ class NewItemImageCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
+        closeButton = UIButton()
+        
+        let configuration = UIImage.SymbolConfiguration(scale: .large)
+        let closeImage = UIImage(systemName: "xmark.circle.fill", withConfiguration: configuration)
+        closeButton.setImage(closeImage, for: .normal)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.clipsToBounds = false
+        contentView.addSubview(closeButton)
         
         NSLayoutConstraint.activate([
 
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16.0),
+            closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -16.0),
+            closeButton.heightAnchor.constraint(equalToConstant: 40.0),
+            closeButton.widthAnchor.constraint(equalToConstant: 40.0),
         ])
         
     }
