@@ -232,13 +232,14 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print(indexPath)
+        print(items)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath) as! NewItemImageCell
         if indexPath.section == 1 {
             let item = items[indexPath.item]
             print(item)
             let path = getDocumentsDirectory().appendingPathComponent(item.image)
             cell.imageView.image = UIImage(contentsOfFile: path.path)
-            cell.closeButton.tag = indexPath.row
+            cell.closeButton.tag = indexPath.item
             cell.closeButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
             
         } else if indexPath.section == 0  {
