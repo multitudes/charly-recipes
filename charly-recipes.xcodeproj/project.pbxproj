@@ -25,6 +25,7 @@
 		453C989B2496388900400F43 /* CRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C989A2496388900400F43 /* CRTextField.swift */; };
 		453C989E24963E3900400F43 /* CRTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C989D24963E3900400F43 /* CRTitleLabel.swift */; };
 		453C98A4249663E300400F43 /* NewItemImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C98A3249663E300400F43 /* NewItemImageCell.swift */; };
+		45EF25D42497E70D00BA994F /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF25D32497E70D00BA994F /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		453C989A2496388900400F43 /* CRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTextField.swift; sourceTree = "<group>"; };
 		453C989D24963E3900400F43 /* CRTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTitleLabel.swift; sourceTree = "<group>"; };
 		453C98A3249663E300400F43 /* NewItemImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewItemImageCell.swift; sourceTree = "<group>"; };
+		45EF25D32497E70D00BA994F /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				451C29EE2494D91F007BD424 /* Bundle-Decodable.swift */,
+				45EF25D32497E70D00BA994F /* PersistenceManager.swift */,
 				451C29ED2494D91F007BD424 /* Extensions */,
 				451C29E72494C309007BD424 /* AllRecipesViewController.swift */,
 				453C98972495198600400F43 /* RecipeHeader.swift */,
@@ -225,6 +228,7 @@
 				451C29FD2494DCD9007BD424 /* AddRecipeViewController.swift in Sources */,
 				451C29F32494D9C4007BD424 /* Section.swift in Sources */,
 				453C98982495198600400F43 /* RecipeHeader.swift in Sources */,
+				45EF25D42497E70D00BA994F /* PersistenceManager.swift in Sources */,
 				451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */,
 				453C989E24963E3900400F43 /* CRTitleLabel.swift in Sources */,
 				453C98A4249663E300400F43 /* NewItemImageCell.swift in Sources */,

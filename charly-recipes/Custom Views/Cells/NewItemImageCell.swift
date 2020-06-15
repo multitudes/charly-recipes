@@ -10,10 +10,7 @@ import UIKit
 
 class NewItemImageCell: UICollectionViewCell {
     static let reuseID: String = "AddRecipeCell"
-    
-
-    
-    
+     
     let imageView = UIImageView()
     var closeButton : UIButton!
     var editable: Bool = true
@@ -33,9 +30,9 @@ class NewItemImageCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
+  
         closeButton = UIButton()
-        
-        let configuration = UIImage.SymbolConfiguration(scale: .large)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 36,weight: .bold, scale: .large)
         let closeImage = UIImage(systemName: "xmark.circle.fill", withConfiguration: configuration)
         closeButton.setImage(closeImage, for: .normal)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
