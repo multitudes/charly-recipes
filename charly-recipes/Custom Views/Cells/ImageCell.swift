@@ -35,7 +35,10 @@ class ImageCell: UICollectionViewCell, SelfConfiguringCell {
     }
     
     func configure(with item: ImageItem) {
-        imageView.image = UIImage(named: item.image)
+        let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
+        print(path.path)
+        imageView.image = UIImage(contentsOfFile: path.path)
+        //imageView.image = UIImage(named: item.image)
     }
 
     

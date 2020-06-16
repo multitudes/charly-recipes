@@ -13,20 +13,8 @@ protocol AddRecipeViewControllerDelegate: class {
     func addRecipeViewController(didFinishAdding item: Recipe)
 }
 
-
 class AddRecipeViewController: UIViewController {
     
-    //var items = [ImageItem(id: 1, name: "", image: "addImagePlaceholder", editable: false)]
-
-    //        ImageItem(  id: 5,
-    //                                          name: "healthy-insta",
-    //                                          image: "00A064A9-5B12-4F50-8581-3D42733D957D",
-    //                                          editable: false),ImageItem(  id: 5,
-    //                                                                       name: "healthy-insta",
-    //                                                                       image: "healthy-insta",
-    //                                                                       editable: false)
-    //
-
     var items:[ImageItem] = []
     
     var horizontalCollectionView: UICollectionView!
@@ -40,7 +28,6 @@ class AddRecipeViewController: UIViewController {
     let recipeDescriptionTextView = UITextView()
     let addImageLabel = CRTitleLabel(with: "Add images: ")
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,20 +39,17 @@ class AddRecipeViewController: UIViewController {
         listenForBackgroundNotification()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //tap.isEnabled = false
         getPersistentData()
     }
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
         title = "Add Recipe"
-        recipeTitleTextField.becomeFirstResponder()
-        //doneBarButton.isEnabled = false
+        //recipeTitleTextField.becomeFirstResponder()
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addRecipe))
-        rightBarButton.isEnabled = false
+        rightBarButton.isEnabled = true
         navigationItem.rightBarButtonItem = rightBarButton
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
         
@@ -152,25 +136,30 @@ class AddRecipeViewController: UIViewController {
     
     @objc func addRecipe() {
         print("saved")
-        let recipe = Recipe(type: "", recipeName: "", ingredients: "", items: [])
+        let recipeName = recipeTitleTextField.text!
+        let ingredients = recipeDescriptionTextView.text!
+        let recipe = Recipe(type: "", recipeName: recipeName, ingredients: ingredients, items: items)
+        PersistenceManager.resetUserDefaults()
         delegate?.addRecipeViewController(didFinishAdding: recipe)
     }
     
     
     @objc func dismissVC() {
+        cleanUp()
+        delegate?.addRecipeViewControllerDidCancel()
+    }
+    
+    func cleanUp() {
         do {
             for i in 0..<items.count{
                 print("trying to remove \(items[i].image)")
-                try FileManager.default.removeItem(at: getDocumentsDirectory().appendingPathComponent(items[i].image))
+                try FileManager.default.removeItem(at: DataModel.getDocumentsDirectory().appendingPathComponent(items[i].image))
             }
         } catch {
             print("Error removing file: \(error)")
         }
         PersistenceManager.resetUserDefaults()
-        delegate?.addRecipeViewControllerDidCancel()
-        //dismiss(animated: true)
     }
-    
     
     func getPersistentData() {
         PersistenceManager.retrieveItems{ [weak self] result in
@@ -254,22 +243,17 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //print(indexPath)
-
-
         if indexPath.section == 1 {
-                    
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath)
             if let imageCell = cell as? NewItemImageCell {
                 let item = items[indexPath.item]
                 print("item in cell \(indexPath.item)",item )
-                let path = getDocumentsDirectory().appendingPathComponent(item.image)
+                let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
                 imageCell.imageView.image = UIImage(contentsOfFile: path.path)
                 imageCell.closeButton.tag = indexPath.item
                 imageCell.closeButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
             }
             return cell
-            
         } else  { //if indexPath.section == 0
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath)
             if cell is ImagePlaceholderCell {
@@ -277,7 +261,6 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
             }
             return cell
         }
-        
     }
     
     @objc func deleteItem(sender:UIButton) {
@@ -285,7 +268,7 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
         print("deleting tag ", i)
         do {
             print("trying to remove \(items[i].image)")
-            try FileManager.default.removeItem(at: getDocumentsDirectory().appendingPathComponent(items[i].image))
+            try FileManager.default.removeItem(at: DataModel.getDocumentsDirectory().appendingPathComponent(items[i].image))
         } catch {
             print("Error removing file: \(error)")
         }
@@ -296,12 +279,10 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
         items.remove(at: i)
         horizontalCollectionView.reloadData()
     }
-    
 }
 
 
 extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func addNewPicture() {
         let picker = UIImagePickerController()
         picker.allowsEditing = true
@@ -314,14 +295,13 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
         guard let image = info[.editedImage] as? UIImage else { return }
         
         let imageName = UUID().uuidString
-        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        let imagePath = DataModel.getDocumentsDirectory().appendingPathComponent(imageName)
         print("DocumentsDirectory ", imagePath)
         if let jpegData = image.jpegData(compressionQuality: 0.8) {
             try? jpegData.write(to: imagePath)
         }
         let item = ImageItem(id: 0, name: "", image: imageName, editable: true)
         PersistenceManager.updateWith(item: item, actionType: .add) { error in
-            
             guard let error = error else {
                 print("item added!" )
                 return
@@ -329,10 +309,7 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
             print(error.localizedDescription)
         }
         items.append(item)
-        //print(items)
-        
         horizontalCollectionView.reloadData()
-        
         dismiss(animated: true)
     }
     
@@ -340,12 +317,6 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         horizontalCollectionView.reloadData()
         dismiss(animated: true)
-    }
-    
-    
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
     }
     
     
@@ -360,6 +331,4 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
             }
         }
     }
-    
-    
 }

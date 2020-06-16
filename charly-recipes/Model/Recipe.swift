@@ -1,5 +1,5 @@
 //
-//  Recipe.swift
+//  Section.swift
 //  charly-recipes
 //
 //  Created by Laurent B on 13/06/2020.
@@ -8,12 +8,10 @@
 
 import Foundation
 
-
-// this is being replaced by the section struct for the collection view.
-struct Recipe2: Codable, Hashable {
-
-    var name: String
-    var pictures: [String]
-    var ingredients: String
+struct Recipe: Decodable, Hashable {
+    let type: String
+    let recipeName: String
+    let ingredients: String
+    let items: [ImageItem]
     
 }

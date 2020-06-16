@@ -11,15 +11,18 @@ import UIKit
 
 
 class AllRecipesViewController: UIViewController {
-
-    let recipes = Bundle.main.decode([Recipe].self, from: "recipes.json")
+    
+    var dataModel: DataModel!
+    
+    var recipes: [Recipe]!
     var collectionView: UICollectionView!
 
     var dataSource: UICollectionViewDiffableDataSource<Recipe, ImageItem>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(recipes)
+        recipes = dataModel.recipes
+        print(recipes!)
         configureViewController()
     }
    
@@ -53,20 +56,28 @@ class AllRecipesViewController: UIViewController {
     }
 
     
-    func configure<T: SelfConfiguringCell>(_ cellType: T.Type, with item: ImageItem, for indexPath: IndexPath) -> T {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseID, for: indexPath) as? T else {
-            fatalError("Unable to dequeue \(cellType)")
-        }
-        cell.configure(with: item)
-        return cell
-    }
+//    func configure<T: SelfConfiguringCell>(_ cellType: T.Type, with item: ImageItem, for indexPath: IndexPath) -> T {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseID, for: indexPath) as? T else {
+//            fatalError("Unable to dequeue \(cellType)")
+//        }
+//        cell.configure(with: item)
+////        let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
+////        imageCell.imageView.image = UIImage(contentsOfFile: path.path)
+//        return cell
+//    }
 
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Recipe, ImageItem>(collectionView: collectionView) { collectionView, indexPath, item in
             switch self.recipes[indexPath.section].type {
 
             default:
-                return self.configure(ImageCell.self, with: item, for: indexPath)
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell" , for: indexPath) as? ImageCell else {
+                    fatalError("Unable to dequeue ")
+                }
+                let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
+                print(item.image)
+                cell.imageView.image = UIImage(contentsOfFile: path.path)
+                return cell
             }
         }
         
@@ -135,7 +146,7 @@ extension AllRecipesViewController: AddRecipeViewControllerDelegate {
     
     func addRecipeViewController(didFinishAdding item: Recipe) {
         print("\ngot ya!!\n")
-        print(item.items)
+        print(item)
         navigationController?.dismiss(animated:true)
     }
 }
