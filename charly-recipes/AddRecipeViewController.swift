@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol AddRecipeViewControllerDelegate: class {
+    func addRecipeViewControllerDidCancel()
+    func addRecipeViewController(didFinishAdding item: Recipe)
+}
+
+
 class AddRecipeViewController: UIViewController {
     
     //var items = [ImageItem(id: 1, name: "", image: "addImagePlaceholder", editable: false)]
@@ -56,8 +62,11 @@ class AddRecipeViewController: UIViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         title = "Add Recipe"
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addRecipe))
+        recipeTitleTextField.becomeFirstResponder()
+        //doneBarButton.isEnabled = false
+        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addRecipe))
+        rightBarButton.isEnabled = false
+        navigationItem.rightBarButtonItem = rightBarButton
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
         
     }
@@ -143,7 +152,8 @@ class AddRecipeViewController: UIViewController {
     
     @objc func addRecipe() {
         print("saved")
-        dismiss(animated: true)
+        let recipe = Recipe(type: "", recipeName: "", ingredients: "", items: [])
+        delegate?.addRecipeViewController(didFinishAdding: recipe)
     }
     
     
@@ -157,7 +167,8 @@ class AddRecipeViewController: UIViewController {
             print("Error removing file: \(error)")
         }
         PersistenceManager.resetUserDefaults()
-        dismiss(animated: true)
+        delegate?.addRecipeViewControllerDidCancel()
+        //dismiss(animated: true)
     }
     
     

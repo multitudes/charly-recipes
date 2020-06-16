@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Section: Decodable, Hashable {
+struct Recipe: Decodable, Hashable {
     let type: String
     let recipeName: String
     let ingredients: String

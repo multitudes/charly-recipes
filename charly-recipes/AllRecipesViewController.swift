@@ -8,12 +8,14 @@
 
 import UIKit
 
+
+
 class AllRecipesViewController: UIViewController {
 
-    let recipes = Bundle.main.decode([Section].self, from: "recipes.json")
+    let recipes = Bundle.main.decode([Recipe].self, from: "recipes.json")
     var collectionView: UICollectionView!
 
-    var dataSource: UICollectionViewDiffableDataSource<Section, ImageItem>?
+    var dataSource: UICollectionViewDiffableDataSource<Recipe, ImageItem>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,7 @@ class AllRecipesViewController: UIViewController {
     }
 
     func createDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, ImageItem>(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource<Recipe, ImageItem>(collectionView: collectionView) { collectionView, indexPath, item in
             switch self.recipes[indexPath.section].type {
 
             default:
@@ -84,7 +86,7 @@ class AllRecipesViewController: UIViewController {
     }
     
     func reloadData() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ImageItem>()
+        var snapshot = NSDiffableDataSourceSnapshot<Recipe, ImageItem>()
         snapshot.appendSections(recipes)
         for recipe in recipes {
             snapshot.appendItems(recipe.items, toSection: recipe)
@@ -107,7 +109,7 @@ class AllRecipesViewController: UIViewController {
         return layout
     }
     
-    func createRecipeSection(using section: Section ) -> NSCollectionLayoutSection {
+    func createRecipeSection(using section: Recipe ) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
@@ -122,4 +124,18 @@ class AllRecipesViewController: UIViewController {
         
     }
 
+}
+
+
+extension AllRecipesViewController: AddRecipeViewControllerDelegate {
+    func addRecipeViewControllerDidCancel() {
+        print("\ncancelld!!\n")
+        navigationController?.dismiss(animated:true)
+    }
+    
+    func addRecipeViewController(didFinishAdding item: Recipe) {
+        print("\ngot ya!!\n")
+        print(item.items)
+        navigationController?.dismiss(animated:true)
+    }
 }
