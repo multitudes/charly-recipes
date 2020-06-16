@@ -74,9 +74,7 @@ class AllRecipesViewController: UIViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell" , for: indexPath) as? ImageCell else {
                     fatalError("Unable to dequeue ")
                 }
-                let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
-                print(item.image)
-                cell.imageView.image = UIImage(contentsOfFile: path.path)
+                cell.configure(with: item)
                 return cell
             }
         }
