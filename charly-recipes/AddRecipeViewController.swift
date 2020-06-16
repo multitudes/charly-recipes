@@ -19,7 +19,7 @@ class AddRecipeViewController: UIViewController {
     
     var horizontalCollectionView: UICollectionView!
     var tap: UITapGestureRecognizer!
-    
+    var saveBarButton: UIBarButtonItem!
     weak var delegate: AllRecipesViewController!
     
     let recipeTitle = CRTitleLabel(with: "Title: ")
@@ -28,6 +28,7 @@ class AddRecipeViewController: UIViewController {
     let recipeDescriptionTextView = UITextView()
     let addImageLabel = CRTitleLabel(with: "Add images: ")
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,10 +48,9 @@ class AddRecipeViewController: UIViewController {
     func configureViewController() {
         view.backgroundColor = .systemBackground
         title = "Add Recipe"
-        //recipeTitleTextField.becomeFirstResponder()
-        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addRecipe))
-        rightBarButton.isEnabled = true
-        navigationItem.rightBarButtonItem = rightBarButton
+        saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(addRecipe))
+        saveBarButton.isEnabled = false
+        navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
         
     }
@@ -137,7 +137,7 @@ class AddRecipeViewController: UIViewController {
     @objc func addRecipe() {
         print("saved")
         let recipeName = recipeTitleTextField.text!
-        let ingredients = recipeDescriptionTextView.text!
+        let ingredients = recipeDescriptionTextView.text ?? ""
         let recipe = Recipe(type: "", recipeName: recipeName, ingredients: ingredients, items: items)
         PersistenceManager.resetUserDefaults()
         delegate?.addRecipeViewController(didFinishAdding: recipe)
@@ -189,18 +189,16 @@ extension AddRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tap.isEnabled = true
     }
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //print(textField.text)
+    func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
         tap.isEnabled = false
-        return true
+        saveBarButton.isEnabled = !textField.text!.isEmpty && items.count != 0
+        print(textField.text ?? "")
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         tap.isEnabled = false
-        //print(textView.text)
+        print(textView.text!)
     }
 }
 
@@ -277,6 +275,7 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
             print(error.localizedDescription)
         }
         items.remove(at: i)
+        saveBarButton.isEnabled = !recipeTitleTextField.text!.isEmpty && items.count != 0
         horizontalCollectionView.reloadData()
     }
 }
@@ -309,6 +308,7 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
             print(error.localizedDescription)
         }
         items.append(item)
+        saveBarButton.isEnabled = !recipeTitleTextField.text!.isEmpty && items.count != 0
         horizontalCollectionView.reloadData()
         dismiss(animated: true)
     }
