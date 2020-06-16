@@ -11,7 +11,7 @@ import UIKit
 class AddRecipeViewController: UIViewController {
     
     //var items = [ImageItem(id: 1, name: "", image: "addImagePlaceholder", editable: false)]
-    var items:[ImageItem] = []
+
     //        ImageItem(  id: 5,
     //                                          name: "healthy-insta",
     //                                          image: "00A064A9-5B12-4F50-8581-3D42733D957D",
@@ -20,10 +20,11 @@ class AddRecipeViewController: UIViewController {
     //                                                                       image: "healthy-insta",
     //                                                                       editable: false)
     //
-    var placeholderItem = [ImageItem(id: 1, name: "", image: "addImagePlaceholder", editable: false)]
+
+    var items:[ImageItem] = []
+    
     var horizontalCollectionView: UICollectionView!
     var tap: UITapGestureRecognizer!
-    
     
     weak var delegate: AllRecipesViewController!
     
@@ -48,6 +49,7 @@ class AddRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //tap.isEnabled = false
         getPersistentData()
     }
     
@@ -77,6 +79,7 @@ class AddRecipeViewController: UIViewController {
         horizontalCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         horizontalCollectionView.register(NewItemImageCell.self, forCellWithReuseIdentifier: "AddRecipeCell")
+        horizontalCollectionView.register(ImagePlaceholderCell.self, forCellWithReuseIdentifier: "PlaceholderCell")
         horizontalCollectionView.allowsMultipleSelection = false
         horizontalCollectionView.backgroundColor = .systemBackground
         horizontalCollectionView.delegate = self
@@ -145,6 +148,15 @@ class AddRecipeViewController: UIViewController {
     
     
     @objc func dismissVC() {
+        do {
+            for i in 0..<items.count{
+                print("trying to remove \(items[i].image)")
+                try FileManager.default.removeItem(at: getDocumentsDirectory().appendingPathComponent(items[i].image))
+            }
+        } catch {
+            print("Error removing file: \(error)")
+        }
+        PersistenceManager.resetUserDefaults()
         dismiss(animated: true)
     }
     
@@ -196,7 +208,7 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            print(collectionView.frame)
+            //print(collectionView.frame)
             return CGSize(width: collectionView.frame.height * 0.7, height: collectionView.frame.height * 0.7)
         }
         return CGSize(width: collectionView.frame.height * 0.8, height: collectionView.frame.height * 0.8)
@@ -231,41 +243,49 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(indexPath)
-        print(items)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath) as! NewItemImageCell
+        //print(indexPath)
+
+
         if indexPath.section == 1 {
-            let item = items[indexPath.item]
-            print(item)
-            let path = getDocumentsDirectory().appendingPathComponent(item.image)
-            cell.imageView.image = UIImage(contentsOfFile: path.path)
-            cell.closeButton.tag = indexPath.item
-            cell.closeButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
+                    
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath)
+            if let imageCell = cell as? NewItemImageCell {
+                let item = items[indexPath.item]
+                print("item in cell \(indexPath.item)",item )
+                let path = getDocumentsDirectory().appendingPathComponent(item.image)
+                imageCell.imageView.image = UIImage(contentsOfFile: path.path)
+                imageCell.closeButton.tag = indexPath.item
+                imageCell.closeButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
+            }
+            return cell
             
-        } else if indexPath.section == 0  {
-            print(placeholderItem[indexPath.item])
-            cell.configure(with: placeholderItem[indexPath.item])
-            cell.isSelected = false
-            cell.closeButton.isHidden = true
+        } else  { //if indexPath.section == 0
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath)
+            if cell is ImagePlaceholderCell {
+                cell.isSelected = false
+            }
+            return cell
         }
-        return cell
+        
     }
     
     @objc func deleteItem(sender:UIButton) {
         let i = sender.tag
-        print(i)
+        print("deleting tag ", i)
         do {
+            print("trying to remove \(items[i].image)")
             try FileManager.default.removeItem(at: getDocumentsDirectory().appendingPathComponent(items[i].image))
         } catch {
             print("Error removing file: \(error)")
         }
         PersistenceManager.updateWith(item: items[i], actionType: .remove) { error in
             guard let error = error else { return }
-            print(error)
+            print(error.localizedDescription)
         }
         items.remove(at: i)
         horizontalCollectionView.reloadData()
     }
+    
 }
 
 
@@ -289,8 +309,17 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
             try? jpegData.write(to: imagePath)
         }
         let item = ImageItem(id: 0, name: "", image: imageName, editable: true)
+        PersistenceManager.updateWith(item: item, actionType: .add) { error in
+            
+            guard let error = error else {
+                print("item added!" )
+                return
+            }
+            print(error.localizedDescription)
+        }
         items.append(item)
-        print(items)
+        //print(items)
+        
         horizontalCollectionView.reloadData()
         
         dismiss(animated: true)

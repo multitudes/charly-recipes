@@ -12,6 +12,11 @@ enum PersistenceActionType {
     case add, remove
 }
 
+enum CRError: String, Error {
+    case unableToRetrieve    = "Could not get the stored items"
+    
+}
+
 
 enum PersistenceManager {
     
@@ -21,47 +26,46 @@ enum PersistenceManager {
         static let items = "item"
     }
     
+    static func resetUserDefaults() {
+        defaults.removeObject(forKey: Keys.items)
+    }
+    
     
     static func updateWith(item: ImageItem, actionType: PersistenceActionType, completed: @escaping (Error?) -> Void) {
         retrieveItems { result in
             switch result {
-            case .success(let items):
-                var retrievedItems = items
-                
-                switch actionType {
-                case .add:
-                    guard !retrievedItems.contains(item) else {
-                        completed(Error.Type.self as? Error)
-                        return
+                case .success(let items):
+                    var retrievedItems = items
+                    
+                    switch actionType {
+                        case .add:
+                            guard !retrievedItems.contains(item) else {
+                                completed(Error.Type.self as? Error)
+                                return
+                            }
+                            retrievedItems.append(item)
+                        case .remove:
+                            retrievedItems.removeAll { $0.image == item.image }
                     }
-                    
-                    retrievedItems.append(item)
-                    
-                case .remove:
-                    retrievedItems.removeAll { $0.image == item.image }
-                }
-                
-                completed(save(items: retrievedItems))
-                
-            case .failure(let error):
-                completed(error)
+                    completed(save(items: retrievedItems))
+                case .failure(let error):
+                    completed(error)
             }
         }
     }
     
     
-    static func retrieveItems(completed: @escaping (Result<[ImageItem], Error>) -> Void) {
+    static func retrieveItems(completed: @escaping (Result<[ImageItem], CRError>) -> Void) {
         guard let itemsData = defaults.object(forKey: Keys.items) as? Data else {
             completed(.success([]))
             return
         }
-        
         do {
             let decoder = JSONDecoder()
             let items = try decoder.decode([ImageItem].self, from: itemsData)
             completed(.success(items))
         } catch {
-            completed(.failure(error))
+            completed(.failure(.unableToRetrieve))
         }
     }
     

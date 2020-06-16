@@ -13,14 +13,7 @@ class NewItemImageCell: UICollectionViewCell {
      
     let imageView = UIImageView()
     var closeButton : UIButton!
-    var editable: Bool = true
 
-    override var isSelected:Bool {
-        didSet {
-            self.imageView.alpha = isSelected ? 0.75 : 1.0
-        }
-      }
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
