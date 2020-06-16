@@ -10,7 +10,7 @@ import UIKit
 
 protocol AddRecipeViewControllerDelegate: class {
     func addRecipeViewControllerDidCancel()
-    func addRecipeViewController(didFinishAdding item: Recipe)
+    func addRecipeViewController(didFinishAdding recipe: Recipe)
 }
 
 class AddRecipeViewController: UIViewController {

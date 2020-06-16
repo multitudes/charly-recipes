@@ -138,13 +138,15 @@ class AllRecipesViewController: UIViewController {
 
 extension AllRecipesViewController: AddRecipeViewControllerDelegate {
     func addRecipeViewControllerDidCancel() {
-        print("\ncancelld!!\n")
+        print("\ncancelled!!\n")
         navigationController?.dismiss(animated:true)
     }
     
-    func addRecipeViewController(didFinishAdding item: Recipe) {
+    func addRecipeViewController(didFinishAdding recipe: Recipe) {
         print("\ngot ya!!\n")
-        print(item)
+        print(recipe)
+        recipes.append(recipe)
+        reloadData()
         navigationController?.dismiss(animated:true)
     }
 }
