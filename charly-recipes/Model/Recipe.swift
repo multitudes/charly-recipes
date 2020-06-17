@@ -9,7 +9,6 @@
 import Foundation
 
 struct Recipe: Codable, Hashable {
-    let type: String
     let recipeName: String
     let ingredients: String
     let items: [ImageItem]

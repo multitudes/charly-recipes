@@ -126,10 +126,9 @@ class AddRecipeViewController: UIViewController {
     
     
     @objc func addRecipe() {
-        print("saved")
         let recipeName = recipeTitleTextField.text!
         let ingredients = recipeDescriptionTextView.text ?? ""
-        let recipe = Recipe(type: "", recipeName: recipeName, ingredients: ingredients, items: items)
+        let recipe = Recipe(recipeName: recipeName, ingredients: ingredients, items: items)
         PersistenceManager.resetUserDefaults()
         delegate?.addRecipeViewController(didFinishAdding: recipe)
     }
