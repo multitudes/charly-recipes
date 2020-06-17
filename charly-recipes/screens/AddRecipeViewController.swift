@@ -25,15 +25,17 @@ class AddRecipeViewController: UIViewController {
     let recipeTitle = CRTitleLabel(with: "Title: ")
     let recipeTitleTextField = CRTextField()
     let recipeDescription = CRTitleLabel(with: "Ingredients: ")
-    let recipeDescriptionTextView = UITextView()
+    let recipeDescriptionTextView = CRTextView()
     let addImageLabel = CRTitleLabel(with: "Add images: ")
     
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        recipeTitleTextField.delegate = self
+        recipeDescriptionTextView.delegate = self
+
         configureViewController()
-        configureTextInput()
         configureHorizontalCollectionView()
         configureUI()
         createDismissKeyboardTapGesture()
@@ -52,19 +54,8 @@ class AddRecipeViewController: UIViewController {
         saveBarButton.isEnabled = false
         navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
-        
     }
     
-    func configureTextInput() {
-        recipeTitleTextField.delegate = self
-        recipeDescriptionTextView.delegate = self
-        
-        recipeDescriptionTextView.adjustsFontForContentSizeCategory = true
-        recipeDescriptionTextView.font = .preferredFont(forTextStyle: .body)
-        recipeDescriptionTextView.layer.borderColor = UIColor.systemGray4.cgColor
-        recipeDescriptionTextView.layer.borderWidth = 1.0
-        recipeDescriptionTextView.layer.cornerRadius = 10
-    }
     
     func configureHorizontalCollectionView() {
         let layout = UICollectionViewFlowLayout()
@@ -302,7 +293,7 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
         let item = ImageItem(id: 0, name: "", image: imageName, editable: true)
         PersistenceManager.updateWith(item: item, actionType: .add) { error in
             guard let error = error else {
-                print("item added!" )
+                //print("item added!" )
                 return
             }
             print(error.localizedDescription)
@@ -319,7 +310,7 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
         dismiss(animated: true)
     }
     
-    
+    // when the app goes into background I resign first responder for the two text input fields
     func listenForBackgroundNotification() {
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
             if let self = self {

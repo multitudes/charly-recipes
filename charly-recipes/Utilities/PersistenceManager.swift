@@ -12,18 +12,13 @@ enum PersistenceActionType {
     case add, remove
 }
 
-enum CRError: String, Error {
-    case unableToRetrieve    = "Could not get the stored items"
-    
-}
-
 
 enum PersistenceManager {
     
     static private let defaults = UserDefaults.standard
     
     enum Keys {
-        static let items = "item"
+        static let items = "items"
     }
     
     static func resetUserDefaults() {
@@ -55,7 +50,7 @@ enum PersistenceManager {
     }
     
     
-    static func retrieveItems(completed: @escaping (Result<[ImageItem], CRError>) -> Void) {
+    static func retrieveItems(completed: @escaping (Result<[ImageItem], Error>) -> Void) {
         guard let itemsData = defaults.object(forKey: Keys.items) as? Data else {
             completed(.success([]))
             return
@@ -65,7 +60,7 @@ enum PersistenceManager {
             let items = try decoder.decode([ImageItem].self, from: itemsData)
             completed(.success(items))
         } catch {
-            completed(.failure(.unableToRetrieve))
+            completed(.failure(error))
         }
     }
     
