@@ -105,11 +105,8 @@ class AllRecipesViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout {
             sectionIndex, layoutEnvironment in
             let recipe = self.recipes[sectionIndex]
-            switch recipe.type {
-                default:
-                    return self.createRecipeSection(using: recipe)
+                 return self.createRecipeSection(using: recipe)
             }
-        }
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
         layout.configuration = config
@@ -120,7 +117,8 @@ class AllRecipesViewController: UIViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-        let layoutGroupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .estimated(350))
+        let fractionalWidth: CGFloat = section.items.count == 1 ? 1 : 0.9
+        let layoutGroupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .estimated(350))
         let layoutgroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupsize, subitems: [layoutItem])
         let layoutSection = NSCollectionLayoutSection(group: layoutgroup)
         layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
@@ -143,7 +141,7 @@ extension AllRecipesViewController: AddRecipeViewControllerDelegate {
     func addRecipeViewController(didFinishAdding recipe: Recipe) {
         print("\ngot ya!!\n")
         print(recipe)
-        recipes.append(recipe)
+        recipes.insert(recipe, at: 0)
         reloadData()
         navigationController?.dismiss(animated:true)
     }
