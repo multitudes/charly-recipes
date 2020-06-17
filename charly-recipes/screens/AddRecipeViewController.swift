@@ -142,7 +142,6 @@ class AddRecipeViewController: UIViewController {
     func cleanUp() {
         do {
             for i in 0..<items.count{
-                print("trying to remove \(items[i].image)")
                 try FileManager.default.removeItem(at: DataModel.getDocumentsDirectory().appendingPathComponent(items[i].image))
             }
         } catch {
@@ -154,7 +153,6 @@ class AddRecipeViewController: UIViewController {
     func getPersistentData() {
         PersistenceManager.retrieveItems{ [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success(let items):
                 self.items = items
@@ -175,20 +173,18 @@ extension AddRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
         tap.isEnabled = true
     }
     
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tap.isEnabled = true
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
         tap.isEnabled = false
         saveBarButton.isEnabled = !textField.text!.isEmpty && items.count != 0
-        print(textField.text ?? "")
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         tap.isEnabled = false
-        print(textView.text!)
     }
 }
 
@@ -235,7 +231,6 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath)
             if let imageCell = cell as? NewItemImageCell {
                 let item = items[indexPath.item]
-                print("item in cell \(indexPath.item)",item )
                 let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
                 imageCell.imageView.image = UIImage(contentsOfFile: path.path)
                 imageCell.closeButton.tag = indexPath.item
@@ -253,13 +248,7 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
     
     @objc func deleteItem(sender:UIButton) {
         let i = sender.tag
-        print("deleting tag ", i)
-        do {
-            print("trying to remove \(items[i].image)")
-            try FileManager.default.removeItem(at: DataModel.getDocumentsDirectory().appendingPathComponent(items[i].image))
-        } catch {
-            print("Error removing file: \(error)")
-        }
+        DataModel.removeImageFromDocuments(with: items[i].image)
         PersistenceManager.updateWith(item: items[i], actionType: .remove) { error in
             guard let error = error else { return }
             print(error.localizedDescription)
