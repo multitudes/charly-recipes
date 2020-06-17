@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class AllRecipesViewController: UIViewController {
     
     var dataModel: DataModel!

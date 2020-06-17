@@ -44,10 +44,11 @@ class CRTextField: UITextField {
             tintColor                   = .label
             textAlignment               = .left
             font                        = UIFont.preferredFont(forTextStyle: .title2)
+            adjustsFontForContentSizeCategory = true
             adjustsFontSizeToFitWidth   = true
             minimumFontSize             = 12
             
-            backgroundColor             = .tertiarySystemBackground
+            //backgroundColor             = .tertiarySystemBackground
             autocorrectionType          = .yes
             autocapitalizationType      = .sentences
             returnKeyType               = .next

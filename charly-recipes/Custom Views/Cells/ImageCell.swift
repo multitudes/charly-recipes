@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageCell: UICollectionViewCell, SelfConfiguringCell {
+class ImageCell: UICollectionViewCell {
    
     static let reuseID: String = "RecipeCell"
     
