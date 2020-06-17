@@ -20,7 +20,7 @@ class AllRecipesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         recipes = dataModel.recipes
-        print(recipes!)
+        //print(recipes!)
         configureViewController()
     }
    
@@ -140,8 +140,9 @@ extension AllRecipesViewController: AddRecipeViewControllerDelegate {
     
     func addRecipeViewController(didFinishAdding recipe: Recipe) {
         print("\ngot ya!!\n")
-        print(recipe)
+        //print(recipe)
         recipes.insert(recipe, at: 0)
+        dataModel.saveJson(with: recipes)
         reloadData()
         navigationController?.dismiss(animated:true)
     }
