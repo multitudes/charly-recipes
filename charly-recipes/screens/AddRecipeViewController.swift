@@ -28,13 +28,13 @@ class AddRecipeViewController: UIViewController {
     let recipeDescriptionTextView = CRTextView()
     let addImageLabel = CRTitleLabel(with: "Add images: ")
     
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         recipeTitleTextField.delegate = self
         recipeDescriptionTextView.delegate = self
-
+        
         configureViewController()
         configureHorizontalCollectionView()
         configureUI()
@@ -135,32 +135,24 @@ class AddRecipeViewController: UIViewController {
     
     
     @objc func dismissVC() {
-        cleanUp()
-        delegate?.addRecipeViewControllerDidCancel()
-    }
-    
-    func cleanUp() {
-        do {
-            for i in 0..<items.count{
-                try FileManager.default.removeItem(at: DataModel.getDocumentsDirectory().appendingPathComponent(items[i].image))
-            }
-        } catch {
-            print("Error removing file: \(error)")
+        for i in 0..<items.count{
+            DataModel.removeImageFromDocuments(with: items[i].image)
         }
         PersistenceManager.resetUserDefaults()
+        delegate?.addRecipeViewControllerDidCancel()
     }
     
     func getPersistentData() {
         PersistenceManager.retrieveItems{ [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let items):
-                self.items = items
-                DispatchQueue.main.async {
-                    self.horizontalCollectionView.reloadData()
+                case .success(let items):
+                    self.items = items
+                    DispatchQueue.main.async {
+                        self.horizontalCollectionView.reloadData()
                 }
-            case .failure(let error):
-                print(error)
+                case .failure(let error):
+                    print(error)
             }
         }
     }
