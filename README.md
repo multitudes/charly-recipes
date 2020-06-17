@@ -8,7 +8,7 @@ A small recipe app which allows the user to manage cooking recipes.
 <br></br>
 
 <p >
-  <img src="https://multitudes.github.io/images/charly-recipes.gif" width="230"  title="app">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="images/charlyrecipes.gif" width="230"  title="app">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 <br></br>
 
