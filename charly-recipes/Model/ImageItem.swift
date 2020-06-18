@@ -10,5 +10,5 @@ import Foundation
 
 struct ImageItem: Codable, Hashable {
 
-    let image: String
+    var image: String
 }

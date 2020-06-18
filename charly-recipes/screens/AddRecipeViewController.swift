@@ -15,6 +15,8 @@ protocol AddRecipeViewControllerDelegate: class {
 
 class AddRecipeViewController: UIViewController {
     
+    private var viewModel = AddRecipeViewModel()
+    
     var items:[ImageItem] = []
     
     var horizontalCollectionView: UICollectionView!
@@ -44,7 +46,8 @@ class AddRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getPersistentData()
+        viewModel.getPersistentData()
+        horizontalCollectionView.reloadData()
     }
     
     func configureViewController() {
@@ -126,35 +129,13 @@ class AddRecipeViewController: UIViewController {
     
     
     @objc func addRecipe() {
-        let recipeName = recipeTitleTextField.text!
-        let ingredients = recipeDescriptionTextView.text ?? ""
-        let recipe = Recipe(recipeName: recipeName, ingredients: ingredients, items: items)
-        PersistenceManager.resetUserDefaults()
-        delegate?.addRecipeViewController(didFinishAdding: recipe)
+        delegate?.addRecipeViewController(didFinishAdding: viewModel.sendBackRecipe())
     }
     
     
     @objc func dismissVC() {
-        for i in 0..<items.count{
-            DataModel.removeImageFromDocuments(with: items[i].image)
-        }
-        PersistenceManager.resetUserDefaults()
+        viewModel.removeAllImages()
         delegate?.addRecipeViewControllerDidCancel()
-    }
-    
-    func getPersistentData() {
-        PersistenceManager.retrieveItems{ [weak self] result in
-            guard let self = self else { return }
-            switch result {
-                case .success(let items):
-                    self.items = items
-                    DispatchQueue.main.async {
-                        self.horizontalCollectionView.reloadData()
-                }
-                case .failure(let error):
-                    print(error)
-            }
-        }
     }
 }
 
@@ -163,20 +144,27 @@ extension AddRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         tap.isEnabled = true
+        textView.text = viewModel.ingredients
     }
+
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tap.isEnabled = true
+        textField.text = viewModel.recipeName
     }
+    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
         tap.isEnabled = false
+        viewModel.updateRecipeName(recipeName: textField.text ?? "")
         saveBarButton.isEnabled = !textField.text!.isEmpty && items.count != 0
     }
     
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         tap.isEnabled = false
+        viewModel.updateIngredients(ingredients: textView.text)
     }
 }
 
@@ -184,11 +172,9 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            //print(collectionView.frame)
             return CGSize(width: collectionView.frame.height * 0.7, height: collectionView.frame.height * 0.7)
         }
         return CGSize(width: collectionView.frame.height * 0.8, height: collectionView.frame.height * 0.8)
-        
     }
     
     
@@ -239,13 +225,10 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
     }
     
     @objc func deleteItem(sender:UIButton) {
-        let i = sender.tag
-        DataModel.removeImageFromDocuments(with: items[i].image)
-        PersistenceManager.updateWith(item: items[i], actionType: .remove) { error in
-            guard let error = error else { return }
-            print(error.localizedDescription)
-        }
-        items.remove(at: i)
+        let imageTag = sender.tag
+        viewModel.deleteImage(imageTag)
+        items = viewModel.items
+       
         saveBarButton.isEnabled = !recipeTitleTextField.text!.isEmpty && items.count != 0
         horizontalCollectionView.reloadData()
     }
@@ -264,21 +247,9 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         
-        let imageName = UUID().uuidString
-        let imagePath = DataModel.getDocumentsDirectory().appendingPathComponent(imageName)
-        print("DocumentsDirectory ", imagePath)
-        if let jpegData = image.jpegData(compressionQuality: 0.8) {
-            try? jpegData.write(to: imagePath)
-        }
-        let item = ImageItem(image: imageName)
-        PersistenceManager.updateWith(item: item, actionType: .add) { error in
-            guard let error = error else {
-                //print("item added!" )
-                return
-            }
-            print(error.localizedDescription)
-        }
-        items.append(item)
+        viewModel.addImage(with: image)
+        items = viewModel.items
+        
         saveBarButton.isEnabled = !recipeTitleTextField.text!.isEmpty && items.count != 0
         horizontalCollectionView.reloadData()
         dismiss(animated: true)
@@ -289,6 +260,7 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
         horizontalCollectionView.reloadData()
         dismiss(animated: true)
     }
+    
     
     // when the app goes into background I resign first responder for the two text input fields
     func listenForBackgroundNotification() {
