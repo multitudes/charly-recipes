@@ -21,9 +21,10 @@ class CRTitleLabel: UILabel {
     }
     
     
-    convenience init(with text: String) {
+    convenience init(with text: String, textAlignment: NSTextAlignment) {
         self.init(frame: .zero)
         self.text = text
+        self.textAlignment = textAlignment
     }
     
     

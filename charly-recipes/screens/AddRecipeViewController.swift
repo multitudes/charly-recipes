@@ -22,11 +22,11 @@ class AddRecipeViewController: UIViewController {
     var saveBarButton: UIBarButtonItem!
     weak var delegate: AllRecipesViewController!
     
-    let recipeTitle = CRTitleLabel(with: "Title: ")
+    let recipeTitle = CRTitleLabel(with: "Title: ", textAlignment: .left)
     let recipeTitleTextField = CRTextField()
-    let recipeDescription = CRTitleLabel(with: "Ingredients: ")
+    let recipeDescription = CRTitleLabel(with: "Ingredients: ", textAlignment: .left)
     let recipeDescriptionTextView = CRTextView()
-    let addImageLabel = CRTitleLabel(with: "Add images: ")
+    let addImageLabel = CRTitleLabel(with: "Add images: ", textAlignment: .left)
     
     
     override func viewDidLoad() {

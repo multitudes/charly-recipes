@@ -11,7 +11,7 @@ import UIKit
 class AllRecipesViewController: UIViewController {
     
     var dataModel: DataModel!
-    
+    var startView: UIView!
     var recipes: [Recipe]!
     var collectionView: UICollectionView!
 
@@ -78,12 +78,21 @@ class AllRecipesViewController: UIViewController {
     }
     
     func reloadData() {
-        var snapshot = NSDiffableDataSourceSnapshot<Recipe, ImageItem>()
-        snapshot.appendSections(recipes)
-        for recipe in recipes {
-            snapshot.appendItems(recipe.items, toSection: recipe)
+        if recipes.isEmpty {
+            startView = CRstartView()
+            startView.frame = view.bounds
+            view.addSubview(startView)
+        }else {
+            if(startView != nil && !startView.isHidden) {
+                startView.removeFromSuperview()
+            }
+            var snapshot = NSDiffableDataSourceSnapshot<Recipe, ImageItem>()
+            snapshot.appendSections(recipes)
+            for recipe in recipes {
+                snapshot.appendItems(recipe.items, toSection: recipe)
+            }
+            dataSource?.apply(snapshot)
         }
-        dataSource?.apply(snapshot)
     }
     
     func createCompositionalLayout() -> UICollectionViewLayout {
