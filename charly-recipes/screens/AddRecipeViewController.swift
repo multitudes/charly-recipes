@@ -270,7 +270,7 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
         if let jpegData = image.jpegData(compressionQuality: 0.8) {
             try? jpegData.write(to: imagePath)
         }
-        let item = ImageItem(id: 0, name: "", image: imageName, editable: true)
+        let item = ImageItem(image: imageName)
         PersistenceManager.updateWith(item: item, actionType: .add) { error in
             guard let error = error else {
                 //print("item added!" )

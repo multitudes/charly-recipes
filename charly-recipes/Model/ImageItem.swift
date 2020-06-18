@@ -9,8 +9,6 @@
 import Foundation
 
 struct ImageItem: Codable, Hashable {
-    let id: Int
-    let name: String
+
     let image: String
-    let editable: Bool
 }
