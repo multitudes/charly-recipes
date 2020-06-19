@@ -17,7 +17,16 @@ class RecipeHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame : frame)
-
+        configure()
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    func configure() {
         let separator = UIView(frame: .zero)
         separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor = .quaternaryLabel
@@ -47,9 +56,4 @@ class RecipeHeader: UICollectionReusableView {
         stackView.setCustomSpacing(12, after: separator)
         stackView.setCustomSpacing(6, after: title)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

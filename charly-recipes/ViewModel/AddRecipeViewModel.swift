@@ -96,7 +96,7 @@ class AddRecipeViewModel {
     }
     
     
-    func sendBackRecipe() -> Recipe {
+    func getRecipe() -> Recipe {
         PersistenceManager.resetUserDefaults()
         return recipe
         }

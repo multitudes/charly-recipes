@@ -10,8 +10,9 @@ import UIKit
 
 class CRstartView: UIView {
 
-    let messageLabel    = CRTitleLabel(with: "No recipes yet! 😀 \nCreate a new recipe\nclicking on the + button above", textAlignment: .center )
     let logoImageView   = UIImageView()
+    let messageLabel    = CRTitleLabel(with: "No recipes yet! 😀 \nCreate a new recipe\nclicking on the + button above", textAlignment: .center )
+    
 
     override init(frame: CGRect) {
         super.init(frame: frame)

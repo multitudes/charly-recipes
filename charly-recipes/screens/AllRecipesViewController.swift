@@ -45,6 +45,12 @@ class AllRecipesViewController: UIViewController {
         reloadData()
     }
 
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        reloadData()
+//    }
+    
+    
     @objc func addRecipe() {
         let destinationVC = AddRecipeViewController()
         destinationVC.delegate = self
@@ -52,7 +58,7 @@ class AllRecipesViewController: UIViewController {
         present(navController, animated: true)
     }
 
-    
+        
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Recipe, ImageItem>(collectionView: collectionView) { collectionView, indexPath, item in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell" , for: indexPath) as? ImageCell else {
@@ -61,7 +67,6 @@ class AllRecipesViewController: UIViewController {
                 cell.configure(with: item)
                 return cell
         }
-        
         dataSource?.supplementaryViewProvider = { [weak self]
             collectionView, kind, indexPath in
             guard let recipeHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RecipeHeader.reuseID, for: indexPath) as? RecipeHeader else {
@@ -77,12 +82,13 @@ class AllRecipesViewController: UIViewController {
         }
     }
     
+    
     func reloadData() {
         if recipes.isEmpty {
             startView = CRstartView()
             startView.frame = view.bounds
             view.addSubview(startView)
-        }else {
+        } else {
             if(startView != nil && !startView.isHidden) {
                 startView.removeFromSuperview()
             }
@@ -90,11 +96,12 @@ class AllRecipesViewController: UIViewController {
             snapshot.appendSections(recipes)
             for recipe in recipes {
                 snapshot.appendItems(recipe.items, toSection: recipe)
-            }
+                            }
             dataSource?.apply(snapshot)
             collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
         }
     }
+    
     
     func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
@@ -108,11 +115,12 @@ class AllRecipesViewController: UIViewController {
         return layout
     }
     
+    
     func createRecipeSection(using section: Recipe ) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-        let fractionalWidth: CGFloat = section.items.count == 1 ? 1 : 0.9
+        let fractionalWidth: CGFloat = 0.93
         let layoutGroupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .estimated(350))
         let layoutgroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupsize, subitems: [layoutItem])
         let layoutSection = NSCollectionLayoutSection(group: layoutgroup)
@@ -121,17 +129,11 @@ class AllRecipesViewController: UIViewController {
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
         return layoutSection
-        
     }
-
 }
 
 
 extension AllRecipesViewController: AddRecipeViewControllerDelegate {
-    func addRecipeViewControllerDidCancel() {
-        print("\ncancelled!!\n")
-        navigationController?.dismiss(animated:true)
-    }
     
     func addRecipeViewController(didFinishAdding recipe: Recipe) {
         print("\nadded!!\n \(recipe)")

@@ -16,7 +16,6 @@
 		451C29F52494DA03007BD424 /* ImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29F42494DA03007BD424 /* ImageItem.swift */; };
 		451C29F92494DA6E007BD424 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29F82494DA6E007BD424 /* ImageCell.swift */; };
 		451C29FD2494DCD9007BD424 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29FC2494DCD9007BD424 /* AddRecipeViewController.swift */; };
-		451C29FF2494DE02007BD424 /* AllRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C29FE2494DE02007BD424 /* AllRecipesViewModel.swift */; };
 		451F84EB249B668100264C33 /* CRstartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451F84EA249B668100264C33 /* CRstartView.swift */; };
 		451F8518249BE08C00264C33 /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451F8517249BE08C00264C33 /* AddRecipeViewModel.swift */; };
 		453371332498C8400015EE79 /* ImagePlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453371322498C8400015EE79 /* ImagePlaceholderCell.swift */; };
@@ -42,7 +41,6 @@
 		451C29F42494DA03007BD424 /* ImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageItem.swift; sourceTree = "<group>"; };
 		451C29F82494DA6E007BD424 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		451C29FC2494DCD9007BD424 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
-		451C29FE2494DE02007BD424 /* AllRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecipesViewModel.swift; sourceTree = "<group>"; };
 		451F84EA249B668100264C33 /* CRstartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRstartView.swift; sourceTree = "<group>"; };
 		451F8517249BE08C00264C33 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		453371322498C8400015EE79 /* ImagePlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlaceholderCell.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			children = (
 				451C29FC2494DCD9007BD424 /* AddRecipeViewController.swift */,
 				451C29E72494C309007BD424 /* AllRecipesViewController.swift */,
-				451C29FE2494DE02007BD424 /* AllRecipesViewModel.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -284,7 +281,6 @@
 				451C29F52494DA03007BD424 /* ImageItem.swift in Sources */,
 				451F84EB249B668100264C33 /* CRstartView.swift in Sources */,
 				453C989B2496388900400F43 /* CRTextField.swift in Sources */,
-				451C29FF2494DE02007BD424 /* AllRecipesViewModel.swift in Sources */,
 				451F8518249BE08C00264C33 /* AddRecipeViewModel.swift in Sources */,
 				451C29D62494C1AA007BD424 /* SceneDelegate.swift in Sources */,
 				45337137249905DC0015EE79 /* DataModel.swift in Sources */,

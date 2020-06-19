@@ -9,7 +9,6 @@
 import UIKit
 
 protocol AddRecipeViewControllerDelegate: class {
-    func addRecipeViewControllerDidCancel()
     func addRecipeViewController(didFinishAdding recipe: Recipe)
 }
 
@@ -44,11 +43,13 @@ class AddRecipeViewController: UIViewController {
         listenForBackgroundNotification()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.getPersistentData()
         horizontalCollectionView.reloadData()
     }
+    
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
@@ -72,6 +73,7 @@ class AddRecipeViewController: UIViewController {
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
     }
+    
     
     func configureUI() {
         let padding: CGFloat = 20
@@ -129,13 +131,14 @@ class AddRecipeViewController: UIViewController {
     
     
     @objc func addRecipe() {
-        delegate?.addRecipeViewController(didFinishAdding: viewModel.sendBackRecipe())
+        let newRecipe = viewModel.getRecipe()
+        delegate?.addRecipeViewController(didFinishAdding: newRecipe)
     }
     
     
     @objc func dismissVC() {
         viewModel.removeAllImages()
-        delegate?.addRecipeViewControllerDidCancel()
+        dismiss(animated: true)
     }
 }
 

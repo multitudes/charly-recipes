@@ -11,15 +11,11 @@ import UIKit
 
 class CRTextView: UITextView {
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        configure()
-//    }
-    
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         configure()
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -27,7 +23,6 @@ class CRTextView: UITextView {
     
     
     func configure() {
-        
         adjustsFontForContentSizeCategory = true
         font = .preferredFont(forTextStyle: .body)
         layer.borderColor = UIColor.systemGray4.cgColor

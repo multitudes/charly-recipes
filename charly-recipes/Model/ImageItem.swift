@@ -9,6 +9,5 @@
 import Foundation
 
 struct ImageItem: Codable, Hashable {
-
     var image: String
 }

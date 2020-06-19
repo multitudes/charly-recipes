@@ -30,7 +30,6 @@ class CRTitleLabel: UILabel {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        
         textColor = .label
         font = UIFont.preferredFont(forTextStyle: .title1)
         adjustsFontForContentSizeCategory = true
