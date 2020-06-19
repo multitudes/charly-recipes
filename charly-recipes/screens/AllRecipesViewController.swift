@@ -14,15 +14,15 @@ class AllRecipesViewController: UIViewController {
     var startView: UIView!
     var recipes: [Recipe]!
     var collectionView: UICollectionView!
-
+    
     var dataSource: UICollectionViewDiffableDataSource<Recipe, ImageItem>?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         recipes = dataModel.recipes
         configureViewController()
     }
-   
+    
     
     func configureViewController() {
         title = "All Recipes"
@@ -35,20 +35,15 @@ class AllRecipesViewController: UIViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
-
+        
         view.addSubview(collectionView)
         
         collectionView.register(RecipeHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RecipeHeader.reuseID)
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseID)
-
+        
         createDataSource()
         reloadData()
     }
-
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        reloadData()
-//    }
     
     
     @objc func addRecipe() {
@@ -57,15 +52,15 @@ class AllRecipesViewController: UIViewController {
         let navController = UINavigationController(rootViewController: destinationVC)
         present(navController, animated: true)
     }
-
-        
+    
+    
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Recipe, ImageItem>(collectionView: collectionView) { collectionView, indexPath, item in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell" , for: indexPath) as? ImageCell else {
-                    fatalError("Unable to dequeue ")
-                }
-                cell.configure(with: item)
-                return cell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell" , for: indexPath) as? ImageCell else {
+                fatalError("Unable to dequeue ")
+            }
+            cell.configure(with: item)
+            return cell
         }
         dataSource?.supplementaryViewProvider = { [weak self]
             collectionView, kind, indexPath in
@@ -75,7 +70,7 @@ class AllRecipesViewController: UIViewController {
             guard let firstItem = self?.dataSource?.itemIdentifier(for: indexPath) else { return nil }
             guard let section = self?.dataSource?.snapshot().sectionIdentifier(containingItem: firstItem) else { return nil }
             if section.recipeName.isEmpty { return nil }
-
+            
             recipeHeader.title.text = section.recipeName
             recipeHeader.ingredients.text = section.ingredients
             return recipeHeader
@@ -96,11 +91,18 @@ class AllRecipesViewController: UIViewController {
             snapshot.appendSections(recipes)
             for recipe in recipes {
                 snapshot.appendItems(recipe.items, toSection: recipe)
-               
             }
             dataSource?.apply(snapshot)
-
+            for index in stride(from: recipes.count - 1, through: 0, by: -1) {
+                collectionView.scrollToItem(at: IndexPath(item: 0, section: index), at: .left, animated: true)
+            }
+            if let attributes = collectionView.layoutAttributesForSupplementaryElement(ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) {
+                var offsetY = attributes.frame.origin.y - collectionView.contentInset.top
+                offsetY -= collectionView.safeAreaInsets.top
+                collectionView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
+            }
         }
+        
     }
     
     
@@ -108,8 +110,8 @@ class AllRecipesViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout {
             sectionIndex, layoutEnvironment in
             let recipe = self.recipes[sectionIndex]
-                 return self.createRecipeSection(using: recipe)
-            }
+            return self.createRecipeSection(using: recipe)
+        }
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
         layout.configuration = config
@@ -121,7 +123,7 @@ class AllRecipesViewController: UIViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-        let fractionalWidth: CGFloat = 0.93
+        let fractionalWidth: CGFloat = 0.9
         let layoutGroupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .estimated(350))
         let layoutgroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupsize, subitems: [layoutItem])
         let layoutSection = NSCollectionLayoutSection(group: layoutgroup)
