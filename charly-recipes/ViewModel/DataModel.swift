@@ -23,7 +23,7 @@ class DataModel {
     
     func loadRecipes() {
         let path = dataFilePath()
-        print("Document Directory is ", DataModel.getDocumentsDirectory() )
+        print("Files are saved in the Document Directory at this path: ", DataModel.getDocumentsDirectory() )
         if fileManager.fileExists(atPath: path.path) {
             if let data = try? Data(contentsOf: path) {
                 let decoder = JSONDecoder()

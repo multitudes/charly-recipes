@@ -93,6 +93,7 @@ class AllRecipesViewController: UIViewController {
                 snapshot.appendItems(recipe.items, toSection: recipe)
             }
             dataSource?.apply(snapshot)
+            // the following is because sometimes the cells dont align correctly
             for index in stride(from: recipes.count - 1, through: 0, by: -1) {
                 collectionView.scrollToItem(at: IndexPath(item: 0, section: index), at: .left, animated: true)
             }
@@ -102,7 +103,6 @@ class AllRecipesViewController: UIViewController {
                 collectionView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
             }
         }
-        
     }
     
     
@@ -139,7 +139,6 @@ class AllRecipesViewController: UIViewController {
 extension AllRecipesViewController: AddRecipeViewControllerDelegate {
     
     func addRecipeViewController(didFinishAdding recipe: Recipe) {
-        print("\nadded!!\n \(recipe)")
         recipes.insert(recipe, at: 0)
         dataModel.saveJson(with: recipes)
         reloadData()

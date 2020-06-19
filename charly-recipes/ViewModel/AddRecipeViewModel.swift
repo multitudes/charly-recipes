@@ -34,7 +34,6 @@ class AddRecipeViewModel {
     
     func updateRecipeName(recipeName: String) {
         recipe.recipeName = recipeName
-        print(recipeName)
     }
     
     
@@ -57,7 +56,6 @@ class AddRecipeViewModel {
         let item = ImageItem(image: imageName)
         PersistenceManager.updateWith(item: item, actionType: .add) { error in
             guard let error = error else {
-                //print("item added!" )
                 return
             }
             print(error.localizedDescription)

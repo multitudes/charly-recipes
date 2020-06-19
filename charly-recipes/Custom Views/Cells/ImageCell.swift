@@ -28,7 +28,6 @@ class ImageCell: UICollectionViewCell {
     
     func configure(with item: ImageItem) {
         let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
-        print(path)
         imageView.image = UIImage(contentsOfFile: path.path)
     }
     
