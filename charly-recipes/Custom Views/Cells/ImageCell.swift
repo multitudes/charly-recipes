@@ -20,7 +20,7 @@ class ImageCell: UICollectionViewCell {
 
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
         
