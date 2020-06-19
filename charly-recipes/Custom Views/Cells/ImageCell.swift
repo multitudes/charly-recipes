@@ -17,7 +17,23 @@ class ImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureLayout()
+    }
+    
+   
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
+    
+    func configure(with item: ImageItem) {
+        let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
+        print(path)
+        imageView.image = UIImage(contentsOfFile: path.path)
+    }
+    
+    
+    func configureLayout() {
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
@@ -25,23 +41,12 @@ class ImageCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         
         NSLayoutConstraint.activate([
-
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-        
     }
     
-    func configure(with item: ImageItem) {
-        let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
-        print(path)
-        imageView.image = UIImage(contentsOfFile: path.path)
-    }
-
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }

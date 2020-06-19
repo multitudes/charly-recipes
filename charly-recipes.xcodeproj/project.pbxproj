@@ -20,7 +20,6 @@
 		451F8518249BE08C00264C33 /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451F8517249BE08C00264C33 /* AddRecipeViewModel.swift */; };
 		453371332498C8400015EE79 /* ImagePlaceholderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453371322498C8400015EE79 /* ImagePlaceholderCell.swift */; };
 		45337137249905DC0015EE79 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45337136249905DC0015EE79 /* DataModel.swift */; };
-		453C98942494E6C900400F43 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 453C98932494E6C900400F43 /* recipes.json */; };
 		453C98982495198600400F43 /* RecipeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C98972495198600400F43 /* RecipeHeader.swift */; };
 		453C989B2496388900400F43 /* CRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C989A2496388900400F43 /* CRTextField.swift */; };
 		453C989E24963E3900400F43 /* CRTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C989D24963E3900400F43 /* CRTitleLabel.swift */; };
@@ -45,7 +44,6 @@
 		451F8517249BE08C00264C33 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		453371322498C8400015EE79 /* ImagePlaceholderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlaceholderCell.swift; sourceTree = "<group>"; };
 		45337136249905DC0015EE79 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		453C98932494E6C900400F43 /* recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		453C98972495198600400F43 /* RecipeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeHeader.swift; sourceTree = "<group>"; };
 		453C989A2496388900400F43 /* CRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTextField.swift; sourceTree = "<group>"; };
 		453C989D24963E3900400F43 /* CRTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTitleLabel.swift; sourceTree = "<group>"; };
@@ -84,30 +82,20 @@
 		451C29D22494C1AA007BD424 /* charly-recipes */ = {
 			isa = PBXGroup;
 			children = (
-				451F8516249BE06B00264C33 /* ViewModel */,
 				45464612249A58CE0062E4FF /* Utilities */,
-				451C29ED2494D91F007BD424 /* Extensions */,
+				451F8516249BE06B00264C33 /* ViewModel */,
 				45464615249A5A880062E4FF /* screens */,
 				451C29EF2494D98B007BD424 /* Model */,
 				451C29F62494DA41007BD424 /* Custom Views */,
 				45464616249A5B370062E4FF /* support */,
 				451C29E12494C1AB007BD424 /* Info.plist */,
-				453C98932494E6C900400F43 /* recipes.json */,
 			);
 			path = "charly-recipes";
-			sourceTree = "<group>";
-		};
-		451C29ED2494D91F007BD424 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		451C29EF2494D98B007BD424 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				45337136249905DC0015EE79 /* DataModel.swift */,
 				451C29F22494D9C4007BD424 /* Recipe.swift */,
 				451C29F42494DA03007BD424 /* ImageItem.swift */,
 			);
@@ -148,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				451F8517249BE08C00264C33 /* AddRecipeViewModel.swift */,
+				45337136249905DC0015EE79 /* DataModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -256,7 +245,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				451C29E02494C1AB007BD424 /* LaunchScreen.storyboard in Resources */,
-				453C98942494E6C900400F43 /* recipes.json in Resources */,
 				451C29DD2494C1AB007BD424 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

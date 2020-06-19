@@ -12,5 +12,4 @@ struct Recipe: Codable, Hashable {
     var recipeName: String
     var ingredients: String
     var items: [ImageItem]
-    
 }

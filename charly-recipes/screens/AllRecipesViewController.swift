@@ -96,9 +96,10 @@ class AllRecipesViewController: UIViewController {
             snapshot.appendSections(recipes)
             for recipe in recipes {
                 snapshot.appendItems(recipe.items, toSection: recipe)
-                            }
+               
+            }
             dataSource?.apply(snapshot)
-            collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
+
         }
     }
     
