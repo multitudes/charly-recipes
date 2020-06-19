@@ -9,11 +9,11 @@
 import UIKit
 
 class CRstartView: UIView {
-
+    
     let logoImageView   = UIImageView()
     let messageLabel    = CRTitleLabel(with: "No recipes yet! 😀 \nCreate a new recipe\nclicking on the + button above", textAlignment: .center )
     
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -24,7 +24,7 @@ class CRstartView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
- 
+    
     private func configure() {
         configureMessageLabel()
         configureLogoImageView()
@@ -36,7 +36,7 @@ class CRstartView: UIView {
         messageLabel.numberOfLines  = 4
         messageLabel.textColor      = .secondaryLabel
         
-
+        
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 150),
             messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
@@ -50,7 +50,7 @@ class CRstartView: UIView {
         addSubview(logoImageView)
         logoImageView.image = UIImage(named: "cookbookIcon")
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             logoImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
             logoImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
@@ -58,5 +58,4 @@ class CRstartView: UIView {
             logoImageView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 20)
         ])
     }
-
 }

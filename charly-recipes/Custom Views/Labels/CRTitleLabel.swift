@@ -9,7 +9,7 @@
 import UIKit
 
 class CRTitleLabel: UILabel {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -34,5 +34,5 @@ class CRTitleLabel: UILabel {
         font = UIFont.preferredFont(forTextStyle: .title1)
         adjustsFontForContentSizeCategory = true
     }
-
+    
 }

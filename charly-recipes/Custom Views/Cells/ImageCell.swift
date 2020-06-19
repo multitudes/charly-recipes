@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageCell: UICollectionViewCell {
-   
+    
     static let reuseID: String = "RecipeCell"
     
     let imageView = UIImageView()
@@ -20,11 +20,11 @@ class ImageCell: UICollectionViewCell {
         configureLayout()
     }
     
-   
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     
     func configure(with item: ImageItem) {
         let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
@@ -46,6 +46,4 @@ class ImageCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
-    
 }

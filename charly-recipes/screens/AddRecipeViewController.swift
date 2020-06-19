@@ -149,7 +149,7 @@ extension AddRecipeViewController: UITextViewDelegate, UITextFieldDelegate {
         tap.isEnabled = true
         textView.text = viewModel.ingredients
     }
-
+    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tap.isEnabled = true
@@ -231,7 +231,7 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
         let imageTag = sender.tag
         viewModel.deleteImage(imageTag)
         items = viewModel.items
-       
+        
         saveBarButton.isEnabled = !recipeTitleTextField.text!.isEmpty && items.count != 0
         horizontalCollectionView.reloadData()
     }

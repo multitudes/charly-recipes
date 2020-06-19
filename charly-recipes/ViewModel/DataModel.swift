@@ -41,11 +41,13 @@ class DataModel {
             }
         }
     }
-
+    
+    
     static func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    
     
     func saveJson(with recipes: [Recipe]) {
         let encoder = JSONEncoder()
@@ -57,11 +59,12 @@ class DataModel {
         }
     }
     
-   
+    
     func dataFilePath() -> URL {
         return DataModel.getDocumentsDirectory().appendingPathComponent(
             "recipes.json")
     }
+    
     
     static func removeImageFromDocuments(with name: String) {
         do {

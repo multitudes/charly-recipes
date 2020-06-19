@@ -9,7 +9,7 @@
 import UIKit
 
 class RecipeHeader: UICollectionReusableView {
-
+    
     static let reuseID = "RecipeHeader"
     
     let title = UILabel()

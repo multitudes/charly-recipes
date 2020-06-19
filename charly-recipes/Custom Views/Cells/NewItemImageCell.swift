@@ -10,20 +10,20 @@ import UIKit
 
 class NewItemImageCell: UICollectionViewCell {
     static let reuseID: String = "AddRecipeCell"
-     
+    
     let imageView = UIImageView()
     var closeButton : UIButton!
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
-  
+        
         closeButton = UIButton()
         let configuration = UIImage.SymbolConfiguration(pointSize: 36,weight: .bold, scale: .large)
         let closeImage = UIImage(systemName: "xmark.circle.fill", withConfiguration: configuration)
@@ -33,7 +33,7 @@ class NewItemImageCell: UICollectionViewCell {
         contentView.addSubview(closeButton)
         
         NSLayoutConstraint.activate([
-
+            
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -50,7 +50,7 @@ class NewItemImageCell: UICollectionViewCell {
     func configure(with item: ImageItem) {
         imageView.image = UIImage(named: item.image)
     }
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -10,7 +10,7 @@ import UIKit
 
 class ImagePlaceholderCell: UICollectionViewCell {
     
-static let reuseID: String = "PlaceholderCell"
+    static let reuseID: String = "PlaceholderCell"
     
     let imageView = UIImageView()
     
@@ -38,7 +38,7 @@ static let reuseID: String = "PlaceholderCell"
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         contentView.addSubview(imageView)
         
         NSLayoutConstraint.activate([
