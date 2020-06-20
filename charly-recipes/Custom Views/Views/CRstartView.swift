@@ -33,8 +33,8 @@ class CRstartView: UIView {
     
     private func configureMessageLabel() {
         addSubview(messageLabel)
-        messageLabel.numberOfLines  = 4
-        messageLabel.textColor      = .secondaryLabel
+        messageLabel.numberOfLines = 4
+        messageLabel.textColor = .secondaryLabel
         
         
         NSLayoutConstraint.activate([

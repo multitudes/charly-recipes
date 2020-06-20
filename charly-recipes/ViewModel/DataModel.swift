@@ -6,8 +6,6 @@
 //  Copyright © 2020 Laurent B. All rights reserved.
 //
 
-
-
 import Foundation
 
 class DataModel {
