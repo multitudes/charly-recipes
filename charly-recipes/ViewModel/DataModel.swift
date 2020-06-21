@@ -10,7 +10,8 @@ import Foundation
 
 class DataModel {
     
-    let fileManager = FileManager.default
+    private var dataSourceFile = "recipes.json"
+    
     var recipes = [Recipe]()
     
     
@@ -19,10 +20,10 @@ class DataModel {
     }
     
     
-    func loadRecipes() {
-        let path = dataFilePath()
-        print("Files are saved in the Document Directory at this path: ", DataModel.getDocumentsDirectory() )
-        if fileManager.fileExists(atPath: path.path) {
+    private func loadRecipes() {
+        let path = FileHelper.getDocumentsDirectory().appendingPathComponent(dataSourceFile)
+        print("Files are saved in the Document Directory at this path: ", FileHelper.getDocumentsDirectory() )
+        if FileManager.default.fileExists(atPath: path.path) {
             if let data = try? Data(contentsOf: path) {
                 let decoder = JSONDecoder()
                 do {
@@ -33,7 +34,7 @@ class DataModel {
             }
         } else {
             if
-                fileManager.createFile(atPath: path.path, contents: nil, attributes: nil){
+                FileManager.default.createFile(atPath: path.path, contents: nil, attributes: nil){
             } else {
                 print("an error happened while creating the file")
             }
@@ -41,32 +42,21 @@ class DataModel {
     }
     
     
-    static func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
-    }
-    
-    
     func saveJson(with recipes: [Recipe]) {
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(recipes)
-            try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
+            let path = FileHelper.getDocumentsDirectory().appendingPathComponent(dataSourceFile)
+            try data.write(to: path, options: Data.WritingOptions.atomic)
         } catch {
             print("Error encoding item array!")
         }
     }
     
     
-    func dataFilePath() -> URL {
-        return DataModel.getDocumentsDirectory().appendingPathComponent(
-            "recipes.json")
-    }
-    
-    
     static func removeImageFromDocuments(with name: String) {
         do {
-            try FileManager.default.removeItem(at: DataModel.getDocumentsDirectory().appendingPathComponent(name))
+            try FileManager.default.removeItem(at: FileHelper.getDocumentsDirectory().appendingPathComponent(name))
         } catch {
             print("Error removing file: \(error)")
         }

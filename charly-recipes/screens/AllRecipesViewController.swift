@@ -11,6 +11,7 @@ import UIKit
 class AllRecipesViewController: UIViewController {
     
     var dataModel: DataModel!
+    
     var startView: UIView!
     var recipes: [Recipe]!
     var collectionView: UICollectionView!

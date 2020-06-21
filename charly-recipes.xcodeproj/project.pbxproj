@@ -25,6 +25,7 @@
 		453C989E24963E3900400F43 /* CRTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C989D24963E3900400F43 /* CRTitleLabel.swift */; };
 		453C98A4249663E300400F43 /* NewItemImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453C98A3249663E300400F43 /* NewItemImageCell.swift */; };
 		45464618249A5F4E0062E4FF /* CRTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45464617249A5F4E0062E4FF /* CRTextView.swift */; };
+		45EA2A29249F6A4D003827A6 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA2A28249F6A4D003827A6 /* FileHelper.swift */; };
 		45EF25D42497E70D00BA994F /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF25D32497E70D00BA994F /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		453C989D24963E3900400F43 /* CRTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTitleLabel.swift; sourceTree = "<group>"; };
 		453C98A3249663E300400F43 /* NewItemImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewItemImageCell.swift; sourceTree = "<group>"; };
 		45464617249A5F4E0062E4FF /* CRTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTextView.swift; sourceTree = "<group>"; };
+		45EA2A28249F6A4D003827A6 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		45EF25D32497E70D00BA994F /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				45EF25D32497E70D00BA994F /* PersistenceManager.swift */,
+				45EA2A28249F6A4D003827A6 /* FileHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				451C29F32494D9C4007BD424 /* Recipe.swift in Sources */,
 				453C98982495198600400F43 /* RecipeHeader.swift in Sources */,
 				45EF25D42497E70D00BA994F /* PersistenceManager.swift in Sources */,
+				45EA2A29249F6A4D003827A6 /* FileHelper.swift in Sources */,
 				451C29E82494C309007BD424 /* AllRecipesViewController.swift in Sources */,
 				45464618249A5F4E0062E4FF /* CRTextView.swift in Sources */,
 				453C989E24963E3900400F43 /* CRTitleLabel.swift in Sources */,

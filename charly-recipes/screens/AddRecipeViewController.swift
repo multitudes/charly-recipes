@@ -212,7 +212,7 @@ extension AddRecipeViewController: UICollectionViewDelegate, UICollectionViewDel
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddRecipeCell", for: indexPath)
             if let imageCell = cell as? NewItemImageCell {
                 let item = items[indexPath.item]
-                let path = DataModel.getDocumentsDirectory().appendingPathComponent(item.image)
+                let path = FileHelper.getDocumentsDirectory().appendingPathComponent(item.image)
                 imageCell.imageView.image = UIImage(contentsOfFile: path.path)
                 imageCell.closeButton.tag = indexPath.item
                 imageCell.closeButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)

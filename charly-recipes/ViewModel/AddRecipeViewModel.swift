@@ -49,7 +49,7 @@ class AddRecipeViewModel {
     
     func addImage(with image: UIImage) {
         let imageName = UUID().uuidString
-        let imagePath = DataModel.getDocumentsDirectory().appendingPathComponent(imageName)
+        let imagePath = FileHelper.getDocumentsDirectory().appendingPathComponent(imageName)
         if let jpegData = image.jpegData(compressionQuality: 0.8) {
             try? jpegData.write(to: imagePath)
         }
