@@ -125,8 +125,8 @@ class AllRecipesViewController: UIViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-        let fractionalWidth: CGFloat = 0.9
-        let layoutGroupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .estimated(350))
+        let fractionalWidth: CGFloat = 0.93
+        let layoutGroupsize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fractionalWidth), heightDimension: .fractionalWidth(fractionalWidth))
         let layoutgroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupsize, subitems: [layoutItem])
         let layoutSection = NSCollectionLayoutSection(group: layoutgroup)
         layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
