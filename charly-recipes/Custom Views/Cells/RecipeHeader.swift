@@ -26,7 +26,7 @@ class RecipeHeader: UICollectionReusableView {
     }
     
     
-    func configure() {
+    private func configure() {
         let separator = UIView(frame: .zero)
         separator.translatesAutoresizingMaskIntoConstraints = false
         separator.backgroundColor = .quaternaryLabel

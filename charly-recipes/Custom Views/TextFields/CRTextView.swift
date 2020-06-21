@@ -22,7 +22,7 @@ class CRTextView: UITextView {
     }
     
     
-    func configure() {
+    private func configure() {
         adjustsFontForContentSizeCategory = true
         font = .preferredFont(forTextStyle: .body)
         layer.borderColor = UIColor.systemGray4.cgColor

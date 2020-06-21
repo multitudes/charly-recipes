@@ -21,7 +21,6 @@ class CRTextField: UITextField {
     }
     
     
-    // without these 2 functions below the text would stick to the left without any padding
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: 10.0, dy: 0)
     }

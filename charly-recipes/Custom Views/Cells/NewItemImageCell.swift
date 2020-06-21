@@ -17,7 +17,16 @@ class NewItemImageCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        configure()
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    private func configure() {
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
@@ -44,15 +53,5 @@ class NewItemImageCell: UICollectionViewCell {
             closeButton.heightAnchor.constraint(equalToConstant: 40.0),
             closeButton.widthAnchor.constraint(equalToConstant: 40.0),
         ])
-        
-    }
-    
-    func configure(with item: ImageItem) {
-        imageView.image = UIImage(named: item.image)
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
