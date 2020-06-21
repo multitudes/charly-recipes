@@ -26,12 +26,6 @@ class ImageCell: UICollectionViewCell {
     }
     
     
-    func configure(with item: ImageItem) {
-        let path = FileHelper.getDocumentsDirectory().appendingPathComponent(item.image)
-        imageView.image = UIImage(contentsOfFile: path.path)
-    }
-    
-    
     func configureLayout() {
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true

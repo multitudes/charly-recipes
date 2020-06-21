@@ -32,7 +32,7 @@ class ImagePlaceholderCell: UICollectionViewCell {
     }
     
     
-    func configure() {
+    private func configure() {
         imageView.image = UIImage(named: "addImagePlaceholder")
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true

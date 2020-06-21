@@ -60,7 +60,8 @@ class AllRecipesViewController: UIViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell" , for: indexPath) as? ImageCell else {
                 fatalError("Unable to dequeue ")
             }
-            cell.configure(with: item)
+            let path = FileHelper.getDocumentsDirectory().appendingPathComponent(item.image)
+            cell.imageView.image = UIImage(contentsOfFile: path.path)
             return cell
         }
         dataSource?.supplementaryViewProvider = { [weak self]
