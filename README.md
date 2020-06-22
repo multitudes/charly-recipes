@@ -3,7 +3,7 @@
 A small recipe app which allows the user to manage cooking recipes.
 
 <p >
-  <img style="border-radius: 50%" src="Icon.png" width="230"  title="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Icon.png" width="230"  title="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
 When first started it will display a blank page and initialize an empty JSON file in the document directory.
