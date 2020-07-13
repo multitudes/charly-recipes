@@ -5,7 +5,7 @@ The app support dark mode and dynamic type.
 
 <br>
 <p align="center">
-  <img src="images/Charly/charly1.png" width="230"  title="PushingBoundaries">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="starting json and images to copy in Documents/charly1.png" width="230"  title="PushingBoundaries">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="images/Charly/charly2.png" width="230"  title="PushingBoundaries">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="images/Charly/charly-portfolio.gif" width="230"  title="PushingBoundaries">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
