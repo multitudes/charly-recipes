@@ -1,20 +1,12 @@
-# charly-recipes
-
+# Recipes
 A small recipe app which allows the user to manage cooking recipes.
-
-<p >
-  <img src="Icon.png" width="230"  title="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</p>
-
-When first started it will display a blank page and initialize an empty JSON file in the document directory.
-If using the simulator the directory will be displayed in the console and you can copy the contents of the folder "starting json and images to copy in Documents" into the documents directory if you like to have some rows to play with. (PS. It will not work with other images. It is always possible to select images in the Photo App though)
-
-The first screen is built using the new compositional layout and it is a whole UICollectionView.
+The main screen is built using the new compositional layout part of the new iOS13 UICollectionView API. 
 The app support dark mode and dynamic type.
 
-<p >
-  <img src="charlyrecipes.gif" width="230"  title="app">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+<p align="center">
+  <img src="images/Charly/charly1.png" width="230"  title="PushingBoundaries">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="images/Charly/charly2.png" width="230"  title="PushingBoundaries">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="images/Charly/charly-portfolio.gif" width="230"  title="PushingBoundaries">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 <br></br>
-
-Icon for the app made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
